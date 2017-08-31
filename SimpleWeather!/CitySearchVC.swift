@@ -58,8 +58,6 @@ extension CitySearchVC: UISearchBarDelegate {
         searchResults.removeAll()
         searchResultsTableView.reloadData()
     }
-    
-    
 }
 
 extension CitySearchVC: MKLocalSearchCompleterDelegate {
@@ -91,6 +89,7 @@ extension CitySearchVC: UITableViewDelegate, UITableViewDataSource {
         
         guard searchResults.count > 0 else {
             cell.textLabel?.text = "No Search Results"
+            cell.isUserInteractionEnabled = false
             return cell
         }
         
@@ -102,6 +101,7 @@ extension CitySearchVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         tableView.deselectRow(at: indexPath, animated: true)
         
         let completion = searchResults[indexPath.row]
@@ -109,22 +109,23 @@ extension CitySearchVC: UITableViewDelegate, UITableViewDataSource {
         let searchRequest = MKLocalSearchRequest(completion: completion)
         let search = MKLocalSearch(request: searchRequest)
         
-        search.start { (response, error) in
-            
-            guard error == nil else {
-                return
-            }
-            
-            let coordinate = response!.mapItems[0].placemark.coordinate
-            let city = completion.title.components(separatedBy: ",")[0]
-            
-            Library.shared.downloadNewWeather(city: city, coordinate: coordinate) {
+        DispatchQueue.global(qos: .background).async {
+            search.start { (response, error) in
                 
-                NotificationCenter.default.post(name: .SWSaveWeatherDone , object: self, userInfo: nil)
-
+                guard error == nil else {
+                    return
+                }
+                
+                let coordinate = response!.mapItems[0].placemark.coordinate
+                let city = completion.title.components(separatedBy: ",")[0]
+                
+                Library.shared.downloadWeather(city: city, coordinate: coordinate, flags: flags(isCurrentLocation: false, isCustomLocation: true), completion: { (error) in
+                    print(error.rawValue)
+                })
             }
-            
-            self.performSegue(withIdentifier: "NewCity", sender: self)
         }
+        
+        self.performSegue(withIdentifier: "NewCity", sender: self)
+
     }
 }
