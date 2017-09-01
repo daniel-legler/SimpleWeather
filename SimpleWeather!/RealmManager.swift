@@ -46,6 +46,21 @@ final class RealmManager {
         }
     }
     
+    func save(_ locations: [Location], completion: @escaping (WeatherApiError)->() ) {
+        
+        do {
+            
+            let realm = try Realm()
+                        
+            try realm.write {
+                realm.add(locations, update: true)
+            }
+            
+        } catch {
+            completion(.RealmError); print(error.localizedDescription)
+        }
+    }
+    
     
     func delete(_ location: Location, _ completion: (WeatherApiError)->()) {
         

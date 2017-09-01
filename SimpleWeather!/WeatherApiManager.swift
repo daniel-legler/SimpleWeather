@@ -12,9 +12,8 @@ import RealmSwift
 enum WeatherType: String {
     case Clear = "Clear"
     case Cloudy = "Cloudy"
-    case RainLight = "Light Rain"
+    case Rain = "Rain"
     case PartiallyCloudy = "Partially Cloudy"
-    case RainHeavy = "Heavy Rain"
     case Snow = "Snow"
     case Thunderstorm = "Thunderstorm"
     case Unknown = "Unknown"
@@ -44,8 +43,7 @@ class WeatherApiManager {
         switch id {
             
         case 200...232: return .Thunderstorm
-        case 300...321: return .RainLight
-        case 500...531: return .RainHeavy
+        case 300...321, 500...531: return .Rain
         case 600...622: return .Snow
         case 700...781: return .Cloudy
         case 800: return .Clear
@@ -107,10 +105,6 @@ class WeatherApiManager {
             
             completion(location, nil)
         }
-        
-        
-        
-        
     }
     
     private func weatherApiCall(url: URL, completion: @escaping (WeatherApiError?, [String:Any]?)->()) {

@@ -64,10 +64,10 @@ class WeatherCollectionVC: UIViewController {
         
         Library.shared.updateAllWeather() { error in
             switch error {
-            case .DownloadError: alert(title: "Network Error", message: "Couldn't download weather")
-            case .InvalidCoordinates: alert(title: "Network Error", message: "Weather for city unavailable")
-            case .JsonError: alert(title: "Network Error", message: "Weather Server Error")
-            case .RealmError: alert(title: "Error", message: "Couldn't Save Weather")
+            case .DownloadError: self.alert(title: "Network Error", message: "Couldn't download weather")
+            case .InvalidCoordinates: self.alert(title: "Network Error", message: "Weather for city unavailable")
+            case .JsonError: self.alert(title: "Network Error", message: "Weather Server Error")
+            case .RealmError: self.alert(title: "Error", message: "Couldn't Save Weather")
             }
         }
         
