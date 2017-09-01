@@ -11,7 +11,6 @@ import UIKit
 import CoreLocation
 import RealmSwift
 
-
 final class RealmManager {
         
     var currentCity: String? {
@@ -29,7 +28,7 @@ final class RealmManager {
 
     }
     
-    func save(_ location: Location, completion: @escaping (WeatherApiError)->() ) {
+    func save(_ location: Location, completion: @escaping (WeatherApiError) -> Void ) {
     
         do {
             
@@ -42,11 +41,11 @@ final class RealmManager {
             }
             
         } catch {
-            completion(.RealmError); print(error.localizedDescription)
+            completion(.realmError); print(error.localizedDescription)
         }
     }
     
-    func save(_ locations: [Location], completion: @escaping (WeatherApiError)->() ) {
+    func save(_ locations: [Location], completion: @escaping (WeatherApiError) -> Void ) {
         
         do {
             
@@ -57,12 +56,11 @@ final class RealmManager {
             }
             
         } catch {
-            completion(.RealmError); print(error.localizedDescription)
+            completion(.realmError); print(error.localizedDescription)
         }
     }
     
-    
-    func delete(_ location: Location, _ completion: (WeatherApiError)->()) {
+    func delete(_ location: Location, _ completion: (WeatherApiError) -> Void) {
         
         do {
             
@@ -76,7 +74,7 @@ final class RealmManager {
             }
             
         } catch {
-            completion(.RealmError); print(error.localizedDescription)
+            completion(.realmError); print(error.localizedDescription)
         }
 
     }
@@ -97,7 +95,7 @@ final class RealmManager {
         }
     }
     
-    func updateCurrentLocation(city: String, completion: @escaping (Bool)->() ) {
+    func updateCurrentLocation(city: String, completion: @escaping (Bool) -> Void ) {
         
         do {
             

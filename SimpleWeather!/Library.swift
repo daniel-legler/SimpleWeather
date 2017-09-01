@@ -18,7 +18,7 @@ final class Library {
     // Update all weather
     
     private init() {
-        NotificationCenter.default.addObserver(self, selector: #selector(addLocalWeatherIfAvailable) , name: .SWLocationAvailable, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(addLocalWeatherIfAvailable), name: .SWLocationAvailable, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(saveWeather), name: .SWNewWeatherDownloaded, object: nil)
     }
     static let shared = Library()
@@ -31,8 +31,7 @@ final class Library {
         return RLM.locations()
     }
     
-    
-    func updateAllWeather(_ completion: @escaping (WeatherApiError)->() ) {
+    func updateAllWeather(_ completion: @escaping (WeatherApiError) -> Void ) {
         
         if connectedToNetwork() {
             
@@ -50,7 +49,7 @@ final class Library {
                 group.leave()
             })
             
-            guard let locations = RLM.locations() else { completion(.RealmError); return }
+            guard let locations = RLM.locations() else { completion(.realmError); return }
             
             for loc in locations {
                 
@@ -58,11 +57,11 @@ final class Library {
                 
                 group.enter()
 
-                downloadWeather(city: loc.city, coordinate: loc.getCoordinate(), flags: flags(isCurrentLocation: false, isCustomLocation: true) ) { (location, error) in
+                downloadWeather(city: loc.city, coordinate: loc.getCoordinate(), flags: Flags(isCurrentLocation: false, isCustomLocation: true) ) { (location, error) in
                     
                     guard error == nil else { completion(error!); return }
                     
-                    guard let newLocation = location else { completion(.RealmError); return }
+                    guard let newLocation = location else { completion(.realmError); return }
                     
                     newLocations.append(newLocation)
                     
@@ -79,17 +78,17 @@ final class Library {
             
         } else {
             print("No connection")
-            NotificationCenter.default.post(name: .SWNoNetworkConnection , object: self, userInfo: nil)
+            NotificationCenter.default.post(name: .SWNoNetworkConnection, object: self, userInfo: nil)
         }
     }
     
-    func downloadWeather(city: String, coordinate: CLLocationCoordinate2D, flags: flags, completion: @escaping (Location?, WeatherApiError?)->()) {
+    func downloadWeather(city: String, coordinate: CLLocationCoordinate2D, flags: Flags, completion: @escaping (Location?, WeatherApiError?) -> Void) {
         
         WAM.downloadWeather(city: city, lat: coordinate.latitude, lon: coordinate.longitude, flags: flags) { (location, error) in
             
             guard error == nil else { completion(nil, error!); return }
             
-            guard let location = location else { completion(nil, .RealmError); return }
+            guard let location = location else { completion(nil, .realmError); return }
             
             completion(location, nil)
             
@@ -99,14 +98,14 @@ final class Library {
     
     // Delete Weather
     
-    func deleteWeatherAt(location: Location, completion: @escaping (WeatherApiError)->()) {
+    func deleteWeatherAt(location: Location, completion: @escaping (WeatherApiError) -> Void) {
         RLM.delete(location) { error in
             completion(error)
         }
     }
     
     // Download Local Weather
-    func downloadLocalWeather(completion: @escaping (Location?, WeatherApiError?)->()) {
+    func downloadLocalWeather(completion: @escaping (Location?, WeatherApiError?) -> Void) {
         
         guard CLM.authStatus else {
             print("Location Auth Status Denied")
@@ -120,7 +119,7 @@ final class Library {
             
             self.RLM.updateCurrentLocation(city: city) { wasCustomLocation in
                 
-                self.downloadWeather(city: city, coordinate: coordinate, flags: flags(isCurrentLocation: true, isCustomLocation: wasCustomLocation), completion: { (location, error) in
+                self.downloadWeather(city: city, coordinate: coordinate, flags: Flags(isCurrentLocation: true, isCustomLocation: wasCustomLocation), completion: { (location, error) in
                     
                     guard error == nil, let location = location else {
                         completion(nil, error!)

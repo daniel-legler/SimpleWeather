@@ -5,7 +5,6 @@
 //  Created by Daniel Legler on 8/12/17.
 //  Copyright © 2017 Daniel Legler. All rights reserved.
 
-
 import Foundation
 import SystemConfiguration
 

@@ -22,7 +22,7 @@ class CitySearchVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(noConnection), name: .SWNoNetworkConnection , object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(noConnection), name: .SWNoNetworkConnection, object: nil)
         
         hideKeyboardWhenTappedAround()
         
@@ -41,7 +41,7 @@ extension CitySearchVC: UISearchBarDelegate {
         if searchText != "" {
 
             guard connectedToNetwork() else {
-                NotificationCenter.default.post(name: .SWNoNetworkConnection , object: self, userInfo: nil)
+                NotificationCenter.default.post(name: .SWNoNetworkConnection, object: self, userInfo: nil)
                 return
             }
         
@@ -66,7 +66,8 @@ extension CitySearchVC: MKLocalSearchCompleterDelegate {
         completer.filterType = .locationsOnly
         
         let results = completer.results.filter { (searchCompletion: MKLocalSearchCompletion) -> Bool in
-            return searchCompletion.subtitle == "" && searchCompletion.title.contains(",") // Ensures city,state,country format
+            // Ensures city,state,country format
+            return searchCompletion.subtitle == "" && searchCompletion.title.contains(",")
         }
         
         searchResults = results
@@ -86,7 +87,6 @@ extension CitySearchVC: UITableViewDelegate, UITableViewDataSource {
         
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
 
-        
         guard searchResults.count > 0 else {
             cell.textLabel?.text = "No Search Results"
             cell.isUserInteractionEnabled = false
@@ -119,7 +119,7 @@ extension CitySearchVC: UITableViewDelegate, UITableViewDataSource {
                 let coordinate = response!.mapItems[0].placemark.coordinate
                 let city = completion.title.components(separatedBy: ",")[0]
                 
-                Library.shared.downloadWeather(city: city, coordinate: coordinate, flags: flags(isCurrentLocation: false, isCustomLocation: true), completion: { (location, error) in
+                Library.shared.downloadWeather(city: city, coordinate: coordinate, flags: Flags(isCurrentLocation: false, isCustomLocation: true), completion: { (location, _) in
                     NotificationCenter.default.post(name: .SWNewWeatherDownloaded, object: location)
                 })
             }

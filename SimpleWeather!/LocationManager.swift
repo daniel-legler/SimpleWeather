@@ -9,7 +9,6 @@
 import Foundation
 import CoreLocation
 
-
 class CoreLocationManager: NSObject, CLLocationManagerDelegate {
     // Request location permission
     // Report location authorization status
@@ -27,13 +26,12 @@ class CoreLocationManager: NSObject, CLLocationManagerDelegate {
         locationManager.startUpdatingLocation()
     }
     
-    
     let locationManager = CLLocationManager()
     
     var authStatus: Bool {
         if CLLocationManager.locationServicesEnabled() {
             switch CLLocationManager.authorizationStatus() {
-            case .authorizedAlways,.authorizedWhenInUse:
+            case .authorizedAlways, .authorizedWhenInUse:
                 return true
             default:
                 return false
@@ -48,7 +46,7 @@ class CoreLocationManager: NSObject, CLLocationManagerDelegate {
         return locationManager.location?.coordinate
     }
     
-    func findCity(completion: @escaping (String?)->Void ) {
+    func findCity(completion: @escaping (String?) -> Void ) {
         
         guard let location = locationManager.location else {
             print("Location Unavailable")
@@ -56,7 +54,7 @@ class CoreLocationManager: NSObject, CLLocationManagerDelegate {
             return
         }
         
-        CLGeocoder().reverseGeocodeLocation(location) { (placemarks, error) in
+        CLGeocoder().reverseGeocodeLocation(location) { (placemarks, _) in
 
             guard let placemark = placemarks?[0],
                   let city      = placemark.addressDictionary!["City"] as? String else {

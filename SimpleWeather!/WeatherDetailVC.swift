@@ -47,4 +47,3 @@ class WeatherDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     }
 }
-

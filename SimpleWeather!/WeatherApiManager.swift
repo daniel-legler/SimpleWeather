@@ -10,23 +10,23 @@ import Foundation
 import RealmSwift
 
 enum WeatherType: String {
-    case Clear = "Clear"
-    case Cloudy = "Cloudy"
-    case Rain = "Rain"
-    case PartiallyCloudy = "Partially Cloudy"
-    case Snow = "Snow"
-    case Thunderstorm = "Thunderstorm"
-    case Unknown = "Unknown"
+    case clear = "Clear"
+    case cloudy = "Cloudy"
+    case rain = "Rain"
+    case partiallyCloudy = "Partially Cloudy"
+    case snow = "Snow"
+    case thunderstorm = "Thunderstorm"
+    case unknown = "Unknown"
 }
 
 enum WeatherApiError: String {
-    case InvalidCoordinates = "Invalid City"
-    case DownloadError = "Error Downloading"
-    case JsonError = "Unexpected Server Response"
-    case RealmError = "Error Saving Weather"
+    case invalidCoordinates = "Invalid City"
+    case downloadError = "Error Downloading"
+    case jsonError = "Unexpected Server Response"
+    case realmError = "Error Saving Weather"
 }
 
-typealias flags = (isCurrentLocation: Bool, isCustomLocation: Bool)
+typealias Flags = (isCurrentLocation: Bool, isCustomLocation: Bool)
 
 class WeatherApiManager {
     
@@ -38,28 +38,28 @@ class WeatherApiManager {
         return URL(string: "http://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(lon)&appid=0356f0d8e9865300021b8b2ba08ee811") ?? nil
     }
     
-    private func weatherTypeForID(id: Int) -> WeatherType? {
+    private func weatherTypeForID(weatherID: Int) -> WeatherType? {
         
-        switch id {
+        switch weatherID {
             
-        case 200...232: return .Thunderstorm
-        case 300...321, 500...531: return .Rain
-        case 600...622: return .Snow
-        case 700...781: return .Cloudy
-        case 800: return .Clear
-        case 800...804: return .Cloudy
-        case 900...962: return .Unknown
+        case 200...232: return .thunderstorm
+        case 300...321, 500...531: return .rain
+        case 600...622: return .snow
+        case 700...781: return .cloudy
+        case 800: return .clear
+        case 800...804: return .cloudy
+        case 900...962: return .unknown
         default: return nil
         
         }
     }
     
-    func downloadWeather(city: String, lat: Double, lon: Double, flags: flags, completion: @escaping(Location?, WeatherApiError?)->()) {
+    func downloadWeather(city: String, lat: Double, lon: Double, flags: Flags, completion: @escaping(Location?, WeatherApiError?) -> Void) {
         
         guard let currentURL = currentWeatherUrl(lat, lon),
               let forecastURL = forecastUrl(lat, lon) else {
                 
-            completion(nil, .InvalidCoordinates)
+            completion(nil, .invalidCoordinates)
             return
         }
         
@@ -70,11 +70,10 @@ class WeatherApiManager {
         group.enter() // API Call: Current Weather
         group.enter() // API Call: Forecast Weather
         
-        
-        weatherApiCall(url: currentURL)  {
+        weatherApiCall(url: currentURL) {
             guard $0 == nil, let json = $1 else { completion(nil, $0!); return }
             
-            guard let current = self.currentWeatherFromJSON(json, completion: { completion(nil, $0); return }) else { completion(nil, .JsonError); return }
+            guard let current = self.currentWeatherFromJSON(json, completion: { completion(nil, $0); return }) else { completion(nil, .jsonError); return }
                 
             currentWeather = current
             
@@ -84,7 +83,7 @@ class WeatherApiManager {
         weatherApiCall(url: forecastURL) {
             guard $0 == nil, let json = $1 else { completion(nil, $0!); return }
 
-            guard let allForecasts = self.forecastsFromJSON(json, completion: { completion(nil, $0); return }) else { completion(nil, .JsonError); return }
+            guard let allForecasts = self.forecastsFromJSON(json, completion: { completion(nil, $0); return }) else { completion(nil, .jsonError); return }
             
             forecasts = allForecasts
             
@@ -107,19 +106,21 @@ class WeatherApiManager {
         }
     }
     
-    private func weatherApiCall(url: URL, completion: @escaping (WeatherApiError?, [String:Any]?)->()) {
+    private func weatherApiCall(url: URL, completion: @escaping (WeatherApiError?, [String:Any]?) -> Void) {
         
         DispatchQueue.global(qos: .background).async {
             
-            URLSession.shared.dataTask(with: url) { (data, urlResponse, error) in
+            URLSession.shared.dataTask(with: url) { (data, _, error) in
                 
-                guard error == nil else { completion(.DownloadError, nil); return }
+                guard error == nil else { completion(.downloadError, nil); return }
                 
                 var parsedData = [String: Any]()
                 do {
-                    try parsedData = JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String:Any]
+                    
+                    try parsedData = JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String:Any] ?? [:]
+                    
                 } catch {
-                    completion(.JsonError, nil)
+                    completion(.jsonError, nil)
                     return
                 }
                 
@@ -129,8 +130,7 @@ class WeatherApiManager {
         }
     }
     
-    
-    private func currentWeatherFromJSON(_ json: [String:Any], completion: @escaping (WeatherApiError)->()) -> CurrentWeather? {
+    private func currentWeatherFromJSON(_ json: [String:Any], completion: @escaping (WeatherApiError) -> Void) -> CurrentWeather? {
 
         let currentWeather = CurrentWeather()
 
@@ -139,20 +139,19 @@ class WeatherApiManager {
               let id = weather[0]["id"] as? Int,
               let directType = weather[0]["main"] as? String,
               let temperatureInfo = json["main"] as? [String:Any],
-              let currentTemp = temperatureInfo["temp"] as? Double else { completion(.JsonError); return nil }
+              let currentTemp = temperatureInfo["temp"] as? Double else { completion(.jsonError); return nil }
         
-        currentWeather.type = self.weatherTypeForID(id: id)?.rawValue ?? directType.capitalized
+        currentWeather.type = self.weatherTypeForID(weatherID: id)?.rawValue ?? directType.capitalized
         currentWeather.temp = currentTemp.kelvinToFarenheit()
         
         return currentWeather
     }
     
-    
-    private func forecastsFromJSON(_ json: [String:Any], completion: @escaping (WeatherApiError)->()) -> [ForecastWeather]? {
+    private func forecastsFromJSON(_ json: [String:Any], completion: @escaping (WeatherApiError) -> Void) -> [ForecastWeather]? {
         
         var forecasts = [ForecastWeather]()
         
-        guard let allForecasts = json["list"] as? [[String:Any]] else { completion(.JsonError); return nil}
+        guard let allForecasts = json["list"] as? [[String:Any]] else { completion(.jsonError); return nil}
         
         for item in allForecasts {
             
@@ -160,17 +159,17 @@ class WeatherApiManager {
             guard let temperatureInfo   = item["temp"] as? [String:Any],
                   let date              = item["dt"] as? Double,
                   let lowTemp           = temperatureInfo["min"] as? Double,
-                  let highTemp          = temperatureInfo["max"] as? Double else { completion(.JsonError); return nil }
+                  let highTemp          = temperatureInfo["max"] as? Double else { completion(.jsonError); return nil }
 
             // JSON Parsing to get forecast weather type
             guard let weather = item["weather"] as? [[String:Any]],
                   let id = weather[0]["id"] as? Int,
-                  let directType = weather[0]["main"] as? String else { completion(.JsonError); return nil }
+                  let directType = weather[0]["main"] as? String else { completion(.jsonError); return nil }
             
             let forecast = ForecastWeather()
             forecast.low = lowTemp.kelvinToFarenheit()
             forecast.high = highTemp.kelvinToFarenheit()
-            forecast.type = self.weatherTypeForID(id: id)?.rawValue ?? directType.capitalized
+            forecast.type = self.weatherTypeForID(weatherID: id)?.rawValue ?? directType.capitalized
             forecast.date = Date(timeIntervalSince1970: date)
             forecasts.append(forecast)
             

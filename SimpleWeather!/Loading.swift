@@ -8,32 +8,29 @@
 import UIKit
 
 class Loading {
-    
+
     static let shared = Loading(frame: UIScreen.main.bounds)
-    
+
     init(frame: CGRect) {
         activity = UIActivityIndicatorView(frame: frame)
     }
-    
+
     private var activity: UIActivityIndicatorView
-    
+
     private let loadingView = UIView(frame: UIScreen.main.bounds)
-        
+
     func show(_ view: UIView) {
         
         loadingView.backgroundColor = UIColor(white: 0, alpha: 0.5)
-        
+
         activity.activityIndicatorViewStyle = .whiteLarge
         activity.startAnimating()
-        
+
         loadingView.addSubview(activity)
         view.addSubview(loadingView)
-        
+
     }
-    
     func hide() {
         Loading.shared.loadingView.removeFromSuperview()
     }
-    
-    
 }

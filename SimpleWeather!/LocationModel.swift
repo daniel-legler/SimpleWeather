@@ -33,7 +33,7 @@ struct LocationModel {
         
         if let forecastWeather = location.forecastWeather?.array as? [ForecastWeather] {
             forecast = []
-            for object in forecastWeather{
+            for object in forecastWeather {
                 self.forecast?.append(ForecastWeatherModel(object))
             }
         } else { self.forecast = nil }
@@ -46,8 +46,6 @@ struct LocationModel {
         current = nil
         forecast = nil
     }
-    
-    
 }
 
 struct CurrentWeatherModel {
@@ -94,6 +92,5 @@ struct ForecastWeatherModel {
         type = nil
         date = nil
     }
-    
-    
+
 }

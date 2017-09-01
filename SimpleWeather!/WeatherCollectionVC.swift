@@ -13,7 +13,6 @@ let swColor = UIColor(red: 71/255, green: 96/255, blue: 137/255, alpha: 1)
 let navigationBarTitleAttributes = [NSFontAttributeName: UIFont(name: "Avenir", size: 20)!,
                                     NSForegroundColorAttributeName: swColor]
 
-
 class WeatherCollectionVC: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
@@ -21,12 +20,13 @@ class WeatherCollectionVC: UIViewController {
     @IBOutlet weak var addWeatherButton: UIBarButtonItem!
     
     var locations: Results<Location> = {
-        let realm = try! Realm()
         
-        let sortProperties = [SortDescriptor(keyPath: "isCurrentLocation", ascending: false), SortDescriptor(keyPath: "city", ascending: true)]
-        
-        return realm.objects(Location.self).sorted(by: sortProperties)
-        
+            let realm = try! Realm()
+            
+            let sortProperties = [SortDescriptor(keyPath: "isCurrentLocation", ascending: false), SortDescriptor(keyPath: "city", ascending: true)]
+            
+            return realm.objects(Location.self).sorted(by: sortProperties)
+
     }()
 
     var token: NotificationToken?
@@ -38,7 +38,7 @@ class WeatherCollectionVC: UIViewController {
         
         editButtonItem.action = #selector(editButton)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(noConnection), name: .SWNoNetworkConnection , object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(noConnection), name: .SWNoNetworkConnection, object: nil)
         
         initializeRealm()
         
@@ -62,12 +62,12 @@ class WeatherCollectionVC: UIViewController {
         
         Loading.shared.show(view)
         
-        Library.shared.updateAllWeather() { error in
+        Library.shared.updateAllWeather { error in
             switch error {
-            case .DownloadError: self.alert(title: "Network Error", message: "Couldn't download weather")
-            case .InvalidCoordinates: self.alert(title: "Network Error", message: "Weather for city unavailable")
-            case .JsonError: self.alert(title: "Network Error", message: "Weather Server Error")
-            case .RealmError: self.alert(title: "Error", message: "Couldn't Save Weather")
+            case .downloadError: self.alert(title: "Network Error", message: "Couldn't download weather")
+            case .invalidCoordinates: self.alert(title: "Network Error", message: "Weather for city unavailable")
+            case .jsonError: self.alert(title: "Network Error", message: "Weather Server Error")
+            case .realmError: self.alert(title: "Error", message: "Couldn't Save Weather")
             }
         }
         
@@ -99,7 +99,6 @@ class WeatherCollectionVC: UIViewController {
 
     }
     
-    
     @objc func editButton() {
         setEditing(!isEditing, animated: true)
     }
@@ -129,7 +128,6 @@ class WeatherCollectionVC: UIViewController {
         
     }
 }
-
 
 extension WeatherCollectionVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -168,11 +166,9 @@ extension WeatherCollectionVC: UICollectionViewDelegate, UICollectionViewDataSou
         }
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return locations.count
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 5
