@@ -197,6 +197,7 @@
 				743E06AE1F44060400D23DAF /* Embed Frameworks */,
 				7BC8F9C8A8599D477519E072 /* [CP] Embed Pods Frameworks */,
 				428950A26943D1F71E736AFB /* [CP] Copy Pods Resources */,
+				748E8DA11F59209300C86179 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -270,6 +271,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SimpleWeather!/Pods-SimpleWeather!-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		748E8DA11F59209300C86179 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"";
 		};
 		7BC8F9C8A8599D477519E072 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

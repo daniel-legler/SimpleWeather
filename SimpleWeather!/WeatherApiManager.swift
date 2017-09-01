@@ -142,7 +142,7 @@ class WeatherApiManager {
               let currentTemp = temperatureInfo["temp"] as? Double else { completion(.JsonError); return nil }
         
         currentWeather.type = self.weatherTypeForID(id: id)?.rawValue ?? directType.capitalized
-        currentWeather.temp = currentTemp.KelvinToFarenheit()
+        currentWeather.temp = currentTemp.kelvinToFarenheit()
         
         return currentWeather
     }
@@ -168,8 +168,8 @@ class WeatherApiManager {
                   let directType = weather[0]["main"] as? String else { completion(.JsonError); return nil }
             
             let forecast = ForecastWeather()
-            forecast.low = lowTemp.KelvinToFarenheit()
-            forecast.high = highTemp.KelvinToFarenheit()
+            forecast.low = lowTemp.kelvinToFarenheit()
+            forecast.high = highTemp.kelvinToFarenheit()
             forecast.type = self.weatherTypeForID(id: id)?.rawValue ?? directType.capitalized
             forecast.date = Date(timeIntervalSince1970: date)
             forecasts.append(forecast)

@@ -22,7 +22,7 @@ class WeatherDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dateLabel.text = Date().TodayString()
+        dateLabel.text = Date().todayString()
         tempLabel.text = "\(Int(location?.current?.temp ?? 0.0))°"
         locationLabel.text = location?.city
         weatherTypeLabel.text = location?.current?.type

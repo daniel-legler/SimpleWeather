@@ -9,7 +9,7 @@
 import Foundation
 
 extension Double {
-    func KelvinToFarenheit() -> Double {
+    func kelvinToFarenheit() -> Double {
         return (self * (9/5) - 459.67).rounded()
     }
 }
@@ -20,8 +20,8 @@ extension Date {
         formatter.dateFormat = "EEEE"
         return formatter.string(from: self)
     }
-    
-    func TodayString() -> String {
+
+    func todayString() -> String {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
         formatter.timeStyle = .none
