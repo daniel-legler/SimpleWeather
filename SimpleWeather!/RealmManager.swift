@@ -60,13 +60,13 @@ final class RealmManager {
         }
     }
     
-    func delete(_ location: Location, _ completion: (WeatherApiError) -> Void) {
+    func delete(_ city: String, _ completion: (WeatherApiError) -> Void) {
         
         do {
             
             let realm = try Realm()
             
-            if let object = realm.object(ofType: Location.self, forPrimaryKey: location.city) {
+            if let object = realm.object(ofType: Location.self, forPrimaryKey: city) {
                 
                 try realm.write {
                     realm.delete(object)

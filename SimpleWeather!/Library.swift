@@ -39,20 +39,10 @@ final class Library {
             
             let group = DispatchGroup()
             
-            group.enter()
-            downloadLocalWeather(completion: { (location, error) in
-                
-                guard let location = location, error == nil else { return }
-                
-                newLocations.append(location)
-                
-                group.leave()
-            })
-            
             guard let locations = RLM.locations() else { completion(.realmError); return }
             
             for loc in locations {
-                
+                                
                 if loc.isCurrentLocation { continue }
                 
                 group.enter()
@@ -69,6 +59,16 @@ final class Library {
                 }
             
             }
+            
+            group.enter()
+            downloadLocalWeather(completion: { (location, error) in
+                
+                guard let location = location, error == nil else { return }
+                
+                newLocations.append(location)
+                
+                group.leave()
+            })
 
             group.notify(queue: .global(), execute: {
                 self.RLM.save(newLocations, completion: { (error) in
@@ -98,8 +98,9 @@ final class Library {
     
     // Delete Weather
     
-    func deleteWeatherAt(location: Location, completion: @escaping (WeatherApiError) -> Void) {
-        RLM.delete(location) { error in
+    func deleteWeatherAt(city: String, completion: @escaping (WeatherApiError) -> Void) {
+                
+        RLM.delete(city) { error in
             completion(error)
         }
     }

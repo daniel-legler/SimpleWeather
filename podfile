@@ -8,5 +8,6 @@ target 'SimpleWeather!' do
   # Pods for SimpleWeather!
   pod 'RealmSwift'
   pod 'SwiftLint'
+  pod 'Material'
 
 end

@@ -12,6 +12,7 @@ import RealmSwift
 let swColor = UIColor(red: 71/255, green: 96/255, blue: 137/255, alpha: 1)
 let navigationBarTitleAttributes = [NSFontAttributeName: UIFont(name: "Avenir", size: 20)!,
                                     NSForegroundColorAttributeName: swColor]
+let sortProperties = [SortDescriptor(keyPath: "isCurrentLocation", ascending: false), SortDescriptor(keyPath: "city", ascending: true)]
 
 class WeatherCollectionVC: UIViewController {
 
@@ -41,9 +42,7 @@ class WeatherCollectionVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(noConnection), name: .SWNoNetworkConnection, object: nil)
         
         initializeRealm()
-        
-        refreshWeather()
-        
+  
     }
     
     @IBAction func addCityButtonPressed(_ sender: Any) {
@@ -63,7 +62,7 @@ class WeatherCollectionVC: UIViewController {
         Loading.shared.show(view)
         
         Library.shared.updateAllWeather { error in
-            switch error {
+            switch error {  
             case .downloadError: self.alert(title: "Network Error", message: "Couldn't download weather")
             case .invalidCoordinates: self.alert(title: "Network Error", message: "Weather for city unavailable")
             case .jsonError: self.alert(title: "Network Error", message: "Weather Server Error")
@@ -81,16 +80,27 @@ class WeatherCollectionVC: UIViewController {
             
             switch changes {
                 
-            case .initial, .update:
+            case .initial:
                 
                 collectionView.reloadData()
-                
+
                 self?.updateUI()
                 
                 Loading.shared.hide()
                 
                 break
-
+                
+            case .update( _, let deletions, let insertions, let modifications):
+            
+                collectionView.performBatchUpdates({
+                    
+                    collectionView.insertItems(at: insertions.map { IndexPath(row: $0, section: 0) })
+                    collectionView.deleteItems(at: deletions.map { IndexPath(row: $0, section: 0) })
+                    collectionView.reloadItems(at: modifications.map { IndexPath(row: $0, section: 0) })
+                    
+                }, completion: { _ in
+                    Loading.shared.hide()
+                })
             case .error(let error):
                 print(error)
                 break
@@ -153,16 +163,20 @@ extension WeatherCollectionVC: UICollectionViewDelegate, UICollectionViewDataSou
         cell.configureWith(locations[indexPath.row])
         
         cell.deleteButton.isHidden = (!isEditing) || (cell.location.isCurrentLocation)
-        cell.deleteButton.tag = indexPath.row
-        cell.deleteButton.addTarget(self, action: #selector(deleteCellButton(button:)), for: UIControlEvents.touchUpInside)
+        cell.deleteButton.cityToDelete = cell.location.city
+        cell.deleteButton.addTarget(self, action: #selector(deleteCellButton(button:)), for: UIControlEvents.touchUpInside )
         
         return cell
     }
     
-    func deleteCellButton(button: UIButton) {
+    func deleteCellButton(button: DeleteButton) {
         
-        Library.shared.deleteWeatherAt(location: locations[button.tag]) { _ in
-            self.alert(title: "Error", message: "Couldn't Delete Weather")
+        guard let city = button.cityToDelete else {
+            print("No City Associated with that Button"); return
+        }
+        
+        Library.shared.deleteWeatherAt(city: city) { (_) in
+            self.alert(title: "Error", message: "Couldn't Delete Weather For \(city)")
         }
     }
     
