@@ -10,6 +10,7 @@ import UIKit
 
 class WeatherDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var weatherTodayView: UIView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
@@ -22,6 +23,10 @@ class WeatherDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        isMotionEnabled = true
+        
+        weatherTodayView.motionIdentifier = location?.city
+
         dateLabel.text = Date().todayString()
         tempLabel.text = "\(Int(location?.current?.temp ?? 0.0))°"
         locationLabel.text = location?.city

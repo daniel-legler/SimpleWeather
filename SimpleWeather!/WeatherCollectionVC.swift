@@ -160,7 +160,7 @@ extension WeatherCollectionVC: UICollectionViewDelegate, UICollectionViewDataSou
         }
         
         cell.configureWith(locations[indexPath.row])
-        
+        cell.motionIdentifier = cell.location.city
         cell.deleteButton.isHidden = (!isEditing) || (cell.location.isCurrentLocation)
         cell.deleteButton.addTarget(self, action: #selector(deleteCellButton(button:)), for: UIControlEvents.touchUpInside )
         
