@@ -26,7 +26,7 @@ extension Date {
         formatter.dateStyle = .long
         formatter.timeStyle = .none
         let currentDate = formatter.string(from: self)
-        return "Today, \(currentDate)"
+        return "\(currentDate)"
 
     }
 }

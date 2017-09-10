@@ -12,7 +12,6 @@ import RealmSwift
 let swColor = UIColor(red: 71/255, green: 96/255, blue: 137/255, alpha: 1)
 let navigationBarTitleAttributes = [NSFontAttributeName: UIFont(name: "Avenir", size: 20)!,
                                     NSForegroundColorAttributeName: swColor]
-let sortProperties = [SortDescriptor(keyPath: "isCurrentLocation", ascending: false), SortDescriptor(keyPath: "city", ascending: true)]
 
 class WeatherCollectionVC: UIViewController {
 
@@ -42,7 +41,7 @@ class WeatherCollectionVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(noConnection), name: .SWNoNetworkConnection, object: nil)
         
         initializeRealm()
-  
+      
     }
     
     @IBAction func addCityButtonPressed(_ sender: Any) {
@@ -163,7 +162,6 @@ extension WeatherCollectionVC: UICollectionViewDelegate, UICollectionViewDataSou
         cell.configureWith(locations[indexPath.row])
         
         cell.deleteButton.isHidden = (!isEditing) || (cell.location.isCurrentLocation)
-        cell.deleteButton.cityToDelete = cell.location.city
         cell.deleteButton.addTarget(self, action: #selector(deleteCellButton(button:)), for: UIControlEvents.touchUpInside )
         
         return cell

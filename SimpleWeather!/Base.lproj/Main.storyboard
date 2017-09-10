@@ -21,7 +21,7 @@
         <!--Navigation Controller-->
         <scene sceneID="TYT-94-MZm">
             <objects>
-                <navigationController id="AWK-BY-n7o" sceneMemberID="viewController">
+                <navigationController id="AWK-BY-n7o" customClass="SWNavigationController" customModule="SimpleWeather_" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="yGD-xz-pPq">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -286,7 +286,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Redondo Beach, CA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cJi-gf-t0q">
-                                        <rect key="frame" x="22" y="248" width="147.66666666666666" height="22"/>
+                                        <rect key="frame" x="44" y="248" width="147.66666666666666" height="22"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -305,7 +305,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today, March 2, 2017" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RWV-8Z-eoJ">
-                                        <rect key="frame" x="17" y="17" width="156.66666666666666" height="22"/>
+                                        <rect key="frame" x="44" y="17" width="156.66666666666666" height="22"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -314,12 +314,12 @@
                                 <color key="backgroundColor" red="0.0" green="0.73725490199999999" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="HCw-S2-kg2" firstAttribute="centerY" secondItem="d2D-tT-wj2" secondAttribute="centerY" constant="-20" id="0op-fy-Fix"/>
+                                    <constraint firstItem="RWV-8Z-eoJ" firstAttribute="leading" secondItem="Pnc-ia-V2B" secondAttribute="leading" id="2jO-cv-yGW"/>
                                     <constraint firstAttribute="height" constant="300" id="4gm-he-jGs"/>
-                                    <constraint firstItem="RWV-8Z-eoJ" firstAttribute="centerX" secondItem="Pnc-ia-V2B" secondAttribute="centerX" id="Aab-oT-3v1"/>
-                                    <constraint firstItem="Pnc-ia-V2B" firstAttribute="centerX" secondItem="cJi-gf-t0q" secondAttribute="centerX" id="Azb-qC-qmg"/>
                                     <constraint firstItem="Pnc-ia-V2B" firstAttribute="centerY" secondItem="HCw-S2-kg2" secondAttribute="centerY" constant="10" id="Dc3-S9-Gw2"/>
                                     <constraint firstItem="cJi-gf-t0q" firstAttribute="centerY" secondItem="JQw-Zm-g6W" secondAttribute="centerY" id="MAG-Ky-TNO"/>
                                     <constraint firstAttribute="bottom" secondItem="cJi-gf-t0q" secondAttribute="bottom" constant="30" id="ObT-qp-dxH"/>
+                                    <constraint firstItem="cJi-gf-t0q" firstAttribute="leading" secondItem="Pnc-ia-V2B" secondAttribute="leading" id="PeA-sb-PnS"/>
                                     <constraint firstAttribute="trailing" secondItem="HCw-S2-kg2" secondAttribute="trailing" constant="23" id="QIT-SJ-C7G"/>
                                     <constraint firstItem="JQw-Zm-g6W" firstAttribute="centerX" secondItem="HCw-S2-kg2" secondAttribute="centerX" id="bt3-AY-w3b"/>
                                     <constraint firstItem="Pnc-ia-V2B" firstAttribute="leading" secondItem="d2D-tT-wj2" secondAttribute="leading" constant="44" id="kf3-dA-1XR"/>

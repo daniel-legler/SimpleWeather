@@ -32,6 +32,11 @@ class CitySearchVC: UIViewController {
 
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        view.endEditing(true)
+    }
+    
 }
 
 extension CitySearchVC: UISearchBarDelegate {

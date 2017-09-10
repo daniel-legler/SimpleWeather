@@ -24,6 +24,8 @@ class WeatherCell: UICollectionViewCell {
         
         self.cityName.text = location.city
         
+        self.deleteButton.cityToDelete = location.city
+
         self.currentTemp.text = "\(String(Int(location.current?.temp ?? 0)))°"
         self.weatherIcon.image = UIImage(named: location.current?.type ?? "Unkown")
         self.locationSymbol.isHidden = !location.isCurrentLocation
