@@ -11,7 +11,7 @@ import CoreLocation
 
 // This class is the interface between the UI and Realm/Networking classes
 // Implementation of the facade design pattern.
-final class Library {
+final class Coordinator {
     
     // Download new weather for a city
     // Delete weather for a city
@@ -21,7 +21,7 @@ final class Library {
         NotificationCenter.default.addObserver(self, selector: #selector(addLocalWeatherIfAvailable), name: .SWLocationAvailable, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(saveWeather), name: .SWNewWeatherDownloaded, object: nil)
     }
-    static let shared = Library()
+    static let shared = Coordinator()
     
     private let WAM = WeatherApiManager()
     private let RLM = RealmManager()

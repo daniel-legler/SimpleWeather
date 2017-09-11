@@ -26,7 +26,7 @@
 		74CD433C1F3ACA5F004BD368 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74CD433B1F3ACA5F004BD368 /* Assets.xcassets */; };
 		74CD433F1F3ACA5F004BD368 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74CD433D1F3ACA5F004BD368 /* LaunchScreen.storyboard */; };
 		74CD434E1F3ACDE2004BD368 /* WeatherApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CD434D1F3ACDE2004BD368 /* WeatherApiManager.swift */; };
-		74CD43521F3B5F94004BD368 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CD43511F3B5F94004BD368 /* Library.swift */; };
+		74CD43521F3B5F94004BD368 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CD43511F3B5F94004BD368 /* Coordinator.swift */; };
 		74D82C701F4BD205002D5F3F /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D82C6F1F4BD205002D5F3F /* RealmManager.swift */; };
 		D81F599EF2E71DE86AC074D8 /* Pods_SimpleWeather_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD61CEEC78F050E16F195D54 /* Pods_SimpleWeather_.framework */; };
 /* End PBXBuildFile section */
@@ -67,7 +67,7 @@
 		74CD433E1F3ACA5F004BD368 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		74CD43401F3ACA5F004BD368 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		74CD434D1F3ACDE2004BD368 /* WeatherApiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherApiManager.swift; sourceTree = "<group>"; };
-		74CD43511F3B5F94004BD368 /* Library.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
+		74CD43511F3B5F94004BD368 /* Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		74D82C6F1F4BD205002D5F3F /* RealmManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		DD61CEEC78F050E16F195D54 /* Pods_SimpleWeather_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimpleWeather_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA96E70086CA6FA8A79C6402 /* Pods-SimpleWeather!.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleWeather!.release.xcconfig"; path = "Pods/Target Support Files/Pods-SimpleWeather!/Pods-SimpleWeather!.release.xcconfig"; sourceTree = "<group>"; };
@@ -135,7 +135,7 @@
 			children = (
 				7415190F1F4E904200AA2230 /* LocationManager.swift */,
 				74D82C6F1F4BD205002D5F3F /* RealmManager.swift */,
-				74CD43511F3B5F94004BD368 /* Library.swift */,
+				74CD43511F3B5F94004BD368 /* Coordinator.swift */,
 				74CD434D1F3ACDE2004BD368 /* WeatherApiManager.swift */,
 				74B6E8BC1F3FE29200F46B10 /* NetworkStatus.swift */,
 			);
@@ -344,7 +344,7 @@
 				74B6E8B71F3FC4CA00F46B10 /* WeatherDetailVC.swift in Sources */,
 				74B6E8B91F3FC67400F46B10 /* WeatherTableViewCell.swift in Sources */,
 				741519101F4E904200AA2230 /* LocationManager.swift in Sources */,
-				74CD43521F3B5F94004BD368 /* Library.swift in Sources */,
+				74CD43521F3B5F94004BD368 /* Coordinator.swift in Sources */,
 				74D82C701F4BD205002D5F3F /* RealmManager.swift in Sources */,
 				744D59751F5F988900E395ED /* DeleteButton.swift in Sources */,
 				74CD434E1F3ACDE2004BD368 /* WeatherApiManager.swift in Sources */,
