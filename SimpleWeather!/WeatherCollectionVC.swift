@@ -60,7 +60,7 @@ class WeatherCollectionVC: UIViewController {
         
         Loading.shared.show(view)
         
-        Library.shared.updateAllWeather { error in
+        Coordinator.shared.updateAllWeather { error in
             switch error {  
             case .downloadError: self.alert(title: "Network Error", message: "Couldn't download weather")
             case .invalidCoordinates: self.alert(title: "Network Error", message: "Weather for city unavailable")
@@ -173,7 +173,7 @@ extension WeatherCollectionVC: UICollectionViewDelegate, UICollectionViewDataSou
             print("No City Associated with that Button"); return
         }
         
-        Library.shared.deleteWeatherAt(city: city) { (_) in
+        Coordinator.shared.deleteWeatherAt(city: city) { (_) in
             self.alert(title: "Error", message: "Couldn't Delete Weather For \(city)")
         }
     }

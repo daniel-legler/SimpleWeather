@@ -124,7 +124,7 @@ extension CitySearchVC: UITableViewDelegate, UITableViewDataSource {
                 let coordinate = response!.mapItems[0].placemark.coordinate
                 let city = completion.title.components(separatedBy: ",")[0]
                 
-                Library.shared.downloadWeather(city: city, coordinate: coordinate, flags: Flags(isCurrentLocation: false, isCustomLocation: true), completion: { (location, _) in
+                Coordinator.shared.downloadWeather(city: city, coordinate: coordinate, flags: Flags(isCurrentLocation: false, isCustomLocation: true), completion: { (location, _) in
                     NotificationCenter.default.post(name: .SWNewWeatherDownloaded, object: location)
                 })
             }

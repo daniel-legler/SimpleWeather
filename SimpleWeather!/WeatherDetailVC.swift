@@ -24,7 +24,6 @@ class WeatherDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         super.viewDidLoad()
         
         isMotionEnabled = true
-        
         weatherTodayView.motionIdentifier = location?.city
 
         dateLabel.text = Date().todayString()
@@ -33,6 +32,20 @@ class WeatherDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         weatherTypeLabel.text = location?.current?.type
         weatherImage.image = UIImage(named: (location?.current?.type ?? "Unkown"))
         
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeDown(_:)))
+        swipeDown.direction = .right
+        swipeDown.numberOfTouchesRequired = 1
+        weatherTodayView.isUserInteractionEnabled = true
+        weatherTodayView.addGestureRecognizer(swipeDown)
+        
+    }
+    
+    @objc
+    func handleSwipeDown(_ sender: UISwipeGestureRecognizer) {
+
+        if sender.state == .ended {
+            navigationController?.popViewController(animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
