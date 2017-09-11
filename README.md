@@ -1,6 +1,6 @@
 # SimpleWeather!
 
-This is a completely refactored version of the SimpleWeather app and was submitted has extended what I submitted to Udacity for my final project of the nanodegree.
+This is a refactored version of the SimpleWeather app and has extended what I submitted to Udacity for my final project of the nanodegree.
 
 Uses RealmSwift to persist weather data across launches.
 
