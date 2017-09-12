@@ -20,9 +20,9 @@ class CoreLocationManager: NSObject, CLLocationManagerDelegate {
         locationManager.delegate = self
         
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        
+
         locationManager.requestWhenInUseAuthorization()
-        
+        locationManager.distanceFilter = 500
         locationManager.startUpdatingLocation()
     }
     
@@ -47,7 +47,7 @@ class CoreLocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     func findCity(completion: @escaping (String?) -> Void ) {
-        
+
         guard let location = locationManager.location else {
             print("Location Unavailable")
             completion(nil)
@@ -68,10 +68,10 @@ class CoreLocationManager: NSObject, CLLocationManagerDelegate {
         
     }
     
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedWhenInUse {
-            NotificationCenter.default.post(name: .SWLocationAvailable, object: nil)
-        }
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+       
+        NotificationCenter.default.post(name: .SWLocationAvailable, object: nil)
+
     }
 
 }

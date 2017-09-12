@@ -21,11 +21,20 @@ final class Coordinator {
         NotificationCenter.default.addObserver(self, selector: #selector(addLocalWeatherIfAvailable), name: .SWLocationAvailable, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(saveWeather), name: .SWNewWeatherDownloaded, object: nil)
     }
+    
     static let shared = Coordinator()
+    
+    func setup() {
+       // Used to initialize shared instance
+    }
     
     private let WAM = WeatherApiManager()
     private let RLM = RealmManager()
     private let CLM = CoreLocationManager()
+    
+    private var currentCity: String? {
+        return RLM.currentCity
+    }
     
     func locations() -> [Location]? {
         return RLM.locations()
@@ -115,9 +124,9 @@ final class Coordinator {
         
         CLM.findCity(completion: { (city) in
             
-            guard   let city = city,
+            guard let city = city,
                 let coordinate = self.CLM.coordinate else { return }
-            
+                        
             self.RLM.updateCurrentLocation(city: city) { wasCustomLocation in
                 
                 self.downloadWeather(city: city, coordinate: coordinate, flags: Flags(isCurrentLocation: true, isCustomLocation: wasCustomLocation), completion: { (location, error) in
@@ -137,9 +146,10 @@ final class Coordinator {
     // Check if weather for current location is available
     
     @objc fileprivate func addLocalWeatherIfAvailable() {
-        
+
         downloadLocalWeather { (location, error) in
             guard error == nil, let location = location else {
+                print("Location was nil")
                 return
             }
             

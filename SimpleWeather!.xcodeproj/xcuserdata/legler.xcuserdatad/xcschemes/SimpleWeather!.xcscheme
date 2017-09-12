@@ -29,6 +29,16 @@
       language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "74A8BC031F674426009BAC05"
+               BuildableName = "SimpleWeather!UITests.xctest"
+               BlueprintName = "SimpleWeather!UITests"
+               ReferencedContainer = "container:SimpleWeather!.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
@@ -66,7 +76,7 @@
       <AdditionalOptions>
       </AdditionalOptions>
       <LocationScenarioReference
-         identifier = "com.apple.dt.IDEFoundation.CurrentLocationScenarioIdentifier"
+         identifier = "San Francisco, CA, USA"
          referenceType = "1">
       </LocationScenarioReference>
    </LaunchAction>

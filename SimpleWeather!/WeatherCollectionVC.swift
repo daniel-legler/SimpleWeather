@@ -98,6 +98,7 @@ class WeatherCollectionVC: UIViewController {
                     collectionView.reloadItems(at: modifications.map { IndexPath(row: $0, section: 0) })
                     
                 }, completion: { _ in
+                    self?.updateUI()
                     Loading.shared.hide()
                 })
             case .error(let error):
