@@ -39,12 +39,17 @@ class WeatherCollectionVC: UIViewController {
         editButtonItem.action = #selector(editButton)
         
         NotificationCenter.default.addObserver(self, selector: #selector(noConnection), name: .SWNoNetworkConnection, object: nil)
+              
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         initializeRealm()
-      
     }
     
     @IBAction func addCityButtonPressed(_ sender: Any) {
+        token?.stop()
         performSegue(withIdentifier: "CitySearch", sender: nil)
     }
     
@@ -90,14 +95,15 @@ class WeatherCollectionVC: UIViewController {
                 break
                 
             case .update( _, let deletions, let insertions, let modifications):
-            
+                
                 collectionView.performBatchUpdates({
-                    
+
                     collectionView.insertItems(at: insertions.map { IndexPath(row: $0, section: 0) })
                     collectionView.deleteItems(at: deletions.map { IndexPath(row: $0, section: 0) })
                     collectionView.reloadItems(at: modifications.map { IndexPath(row: $0, section: 0) })
                     
                 }, completion: { _ in
+                    collectionView.reloadData()
                     self?.updateUI()
                     Loading.shared.hide()
                 })
@@ -108,6 +114,8 @@ class WeatherCollectionVC: UIViewController {
         }
 
     }
+    
+
     
     @objc func editButton() {
         setEditing(!isEditing, animated: true)
