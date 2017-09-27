@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E4CBDA1E9DA08809ECAD8DB8E75581D9"
+               BlueprintIdentifier = "41BFAD9A8019C9D471669D5271A2F9DA"
                BuildableName = "Pods_SimpleWeather_.framework"
                BlueprintName = "Pods-SimpleWeather!"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -26,7 +26,6 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
@@ -37,7 +36,6 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = ""
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -47,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E4CBDA1E9DA08809ECAD8DB8E75581D9"
+            BlueprintIdentifier = "41BFAD9A8019C9D471669D5271A2F9DA"
             BuildableName = "Pods_SimpleWeather_.framework"
             BlueprintName = "Pods-SimpleWeather!"
             ReferencedContainer = "container:Pods.xcodeproj">
