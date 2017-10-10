@@ -16,8 +16,9 @@ let navigationBarTitleAttributes = [NSFontAttributeName: UIFont(name: "Avenir", 
 class WeatherCollectionVC: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var refreshButton: UIBarButtonItem!
-    @IBOutlet weak var addWeatherButton: UIBarButtonItem!
+    @IBOutlet weak var doneEditingButton: UIBarButtonItem!
+    
+    var refresher: UIRefreshControl!
     
     var locations: Results<Location> = {
         
@@ -34,21 +35,37 @@ class WeatherCollectionVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(noConnection), name: .SWNoNetworkConnection, object: nil)
+
         customizeNavigationController()
         
-        editButtonItem.action = #selector(editButton)
+        doneEditingButton.target = self
+        doneEditingButton.action = #selector(editButton)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(noConnection), name: .SWNoNetworkConnection, object: nil)
-              
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         initializeRealm()
+        
+        fabMenuController?.fabMenu.isHidden = false
+
     }
     
-    @IBAction func addCityButtonPressed(_ sender: Any) {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.refresher = UIRefreshControl()
+        self.collectionView.alwaysBounceVertical = true
+        self.refresher.tintColor = UIColor.white
+        self.refresher.addTarget(self, action: #selector(refreshWeather), for: .valueChanged)
+        self.collectionView.addSubview(refresher)
+        
+        refreshWeather()
+    }
+    
+    func addCityButtonPressed() {
         token?.stop()
         performSegue(withIdentifier: "CitySearch", sender: nil)
     }
@@ -57,23 +74,19 @@ class WeatherCollectionVC: UIViewController {
         Loading.shared.show(view)
     }
     
-    @IBAction func refreshButton(_ sender: Any) {
-        refreshWeather()
-    }
-    
     func refreshWeather() {
         
-        Loading.shared.show(view)
-        
         Coordinator.shared.updateAllWeather { error in
-            switch error {  
+            self.refresher.endRefreshing()
+            guard error == nil else { return }
+            
+            switch error! {
             case .downloadError: self.alert(title: "Network Error", message: "Couldn't download weather")
             case .invalidCoordinates: self.alert(title: "Network Error", message: "Weather for city unavailable")
             case .jsonError: self.alert(title: "Network Error", message: "Weather Server Error")
             case .realmError: self.alert(title: "Error", message: "Couldn't Save Weather")
             }
         }
-        
     }
 
     func initializeRealm() {
@@ -98,24 +111,22 @@ class WeatherCollectionVC: UIViewController {
                 
                 collectionView.performBatchUpdates({
 
+                    collectionView.reloadItems(at: modifications.map { IndexPath(row: $0, section: 0) })
                     collectionView.insertItems(at: insertions.map { IndexPath(row: $0, section: 0) })
                     collectionView.deleteItems(at: deletions.map { IndexPath(row: $0, section: 0) })
-                    collectionView.reloadItems(at: modifications.map { IndexPath(row: $0, section: 0) })
                     
                 }, completion: { _ in
                     collectionView.reloadData()
                     self?.updateUI()
                     Loading.shared.hide()
+                    self?.refresher.endRefreshing()
                 })
             case .error(let error):
                 print(error)
                 break
             }
         }
-
     }
-    
-
     
     @objc func editButton() {
         setEditing(!isEditing, animated: true)
@@ -124,11 +135,10 @@ class WeatherCollectionVC: UIViewController {
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
 
+        doneEditingButton.tintColor = editing == true ? swColor : .clear
+        doneEditingButton.isEnabled = editing
+        fabMenuController?.fabMenu.isHidden = editing
         collectionView.reloadData()
-        
-        refreshButton.isEnabled = !editing
-        
-        addWeatherButton.isEnabled = !editing
         
     }
     
@@ -141,8 +151,6 @@ class WeatherCollectionVC: UIViewController {
         }
     
         collectionView.isHidden = !locationsPresent
-        refreshButton.isEnabled = locationsPresent
-        editButtonItem.isEnabled = locationsPresent
         
     }
 }

@@ -27,6 +27,11 @@ class CitySearchVC: UIViewController {
         
         searchCompleter.delegate = self
 
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
         searchBar.becomeFirstResponder()
 
     }

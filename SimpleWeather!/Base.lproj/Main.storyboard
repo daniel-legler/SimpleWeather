@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AWK-BY-n7o">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13165.3"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -21,7 +20,7 @@
         <!--Navigation Controller-->
         <scene sceneID="TYT-94-MZm">
             <objects>
-                <navigationController id="AWK-BY-n7o" customClass="SWNavigationController" customModule="SimpleWeather_" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SWNavigationController" id="AWK-BY-n7o" customClass="SWNavigationController" customModule="SimpleWeather_" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="yGD-xz-pPq">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -164,25 +163,13 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Weather!" id="5kE-Gj-TRH">
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="Gb5-Yz-flQ">
-                                <color key="tintColor" red="0.27811506390000001" green="0.37729325889999998" blue="0.53735440970000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <connections>
-                                    <action selector="addCityButtonPressed:" destination="BYZ-38-t0r" id="Hlx-Dr-O2R"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem systemItem="refresh" id="a7t-Qg-c1N">
-                                <color key="tintColor" red="0.27811506390000001" green="0.37729325889999998" blue="0.53735440970000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <connections>
-                                    <action selector="refreshButton:" destination="BYZ-38-t0r" id="oL5-gW-aAL"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="2IW-AF-Sz5">
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addWeatherButton" destination="Gb5-Yz-flQ" id="Ahl-hV-JhP"/>
                         <outlet property="collectionView" destination="4g4-lh-8hF" id="0Gc-Js-rS9"/>
-                        <outlet property="refreshButton" destination="a7t-Qg-c1N" id="myY-Hb-pUI"/>
+                        <outlet property="doneEditingButton" destination="2IW-AF-Sz5" id="M9W-pX-ITS"/>
                         <outlet property="searchDisplayController" destination="2Au-fi-leT" id="RON-ae-DO3"/>
                         <segue destination="pWn-dd-hpf" kind="show" identifier="WeatherDetail" id="T11-H0-9L8"/>
                         <segue destination="Y12-Hs-Gq7" kind="show" identifier="CitySearch" id="zUS-zd-wxf"/>
@@ -279,8 +266,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d2D-tT-wj2">
                                 <rect key="frame" x="0.0" y="20" width="414" height="300"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="80°" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="32" translatesAutoresizingMaskIntoConstraints="NO" id="Pnc-ia-V2B">
-                                        <rect key="frame" x="44" y="99" width="103" height="82"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="80°" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="32" translatesAutoresizingMaskIntoConstraints="NO" id="Pnc-ia-V2B">
+                                        <rect key="frame" x="44" y="99" width="156.66666666666666" height="82"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="60"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -321,6 +308,7 @@
                                     <constraint firstAttribute="bottom" secondItem="cJi-gf-t0q" secondAttribute="bottom" constant="30" id="ObT-qp-dxH"/>
                                     <constraint firstItem="cJi-gf-t0q" firstAttribute="leading" secondItem="Pnc-ia-V2B" secondAttribute="leading" id="PeA-sb-PnS"/>
                                     <constraint firstAttribute="trailing" secondItem="HCw-S2-kg2" secondAttribute="trailing" constant="23" id="QIT-SJ-C7G"/>
+                                    <constraint firstItem="Pnc-ia-V2B" firstAttribute="trailing" secondItem="RWV-8Z-eoJ" secondAttribute="trailing" id="b3Q-VY-L5w"/>
                                     <constraint firstItem="JQw-Zm-g6W" firstAttribute="centerX" secondItem="HCw-S2-kg2" secondAttribute="centerX" id="bt3-AY-w3b"/>
                                     <constraint firstItem="Pnc-ia-V2B" firstAttribute="leading" secondItem="d2D-tT-wj2" secondAttribute="leading" constant="44" id="kf3-dA-1XR"/>
                                 </constraints>

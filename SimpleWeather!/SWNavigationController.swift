@@ -14,5 +14,6 @@ class SWNavigationController: UINavigationController {
             super.viewDidLoad()
             isMotionEnabled = true
             motionNavigationTransitionType = .autoReverse(presenting: .zoomSlide(direction: .left))
+
         }
 }

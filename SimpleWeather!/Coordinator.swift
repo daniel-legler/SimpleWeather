@@ -40,7 +40,7 @@ final class Coordinator {
         return RLM.locations()
     }
     
-    func updateAllWeather(_ completion: @escaping (WeatherApiError) -> Void ) {
+    func updateAllWeather(_ completion: @escaping (WeatherApiError?) -> Void ) {
         
         if connectedToNetwork() {
             
@@ -86,8 +86,8 @@ final class Coordinator {
             })
             
         } else {
-            print("No connection")
             NotificationCenter.default.post(name: .SWNoNetworkConnection, object: self, userInfo: nil)
+            completion(nil)
         }
     }
     

@@ -105,7 +105,8 @@ final class RealmManager {
             if let currentLocation = Array(realm.objects(Location.self).filter("isCurrentLocation == true")).first {
                 
                 // If this location wasn't added by the user manually, remove it
-                if currentLocation.isCustomLocation == false {
+                if !currentLocation.isCustomLocation &&
+                    currentLocation.city != city {
                 
                     try realm.write {
                         realm.delete(currentLocation)

@@ -7,18 +7,25 @@
 //
 
 import UIKit
-import CoreData
+import Firebase
+import Material
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func applicationDidFinishLaunching(_ application: UIApplication) {
         
+        FirebaseApp.configure()
         Coordinator.shared.setup()
         
-        return true
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let rootVC = mainStoryboard.instantiateViewController(withIdentifier: "SWNavigationController")
+        
+        window = UIWindow(frame: Screen.bounds)
+        window!.rootViewController = AppFABMenuController(rootViewController: rootVC)
+        window!.makeKeyAndVisible()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

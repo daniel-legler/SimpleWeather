@@ -42,9 +42,7 @@ extension UIViewController {
         navigationController?.navigationBar.titleTextAttributes = navigationBarTitleAttributes
         navigationController?.navigationBar.tintColor = swColor
         navigationController?.navigationBar.backgroundColor = swColor
-        
-        navigationItem.leftBarButtonItem = editButtonItem
-        
+                
     }
     
 }
