@@ -40,8 +40,8 @@ extension UIViewController {
     func customizeNavigationController() {
         
         navigationController?.navigationBar.titleTextAttributes = navigationBarTitleAttributes
-        navigationController?.navigationBar.tintColor = swColor
-        navigationController?.navigationBar.backgroundColor = swColor
+        navigationController?.navigationBar.tintColor = SWPrimaryColor
+        navigationController?.navigationBar.backgroundColor = SWPrimaryColor
                 
     }
     

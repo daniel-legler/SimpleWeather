@@ -9,16 +9,15 @@
 import UIKit
 import RealmSwift
 
-let swColor = UIColor(red: 71/255, green: 96/255, blue: 137/255, alpha: 1)
+let SWPrimaryColor = UIColor(red: 71/255, green: 96/255, blue: 137/255, alpha: 1)
+let SWSecondaryColor = UIColor(red: 0, green: 0.737, blue: 0.831, alpha: 1)
 let navigationBarTitleAttributes = [NSFontAttributeName: UIFont(name: "Avenir", size: 20)!,
-                                    NSForegroundColorAttributeName: swColor]
+                                    NSForegroundColorAttributeName: SWPrimaryColor]
 
 class WeatherCollectionVC: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var doneEditingButton: UIBarButtonItem!
-    
-    var refresher: UIRefreshControl!
     
     var locations: Results<Location> = {
         
@@ -42,31 +41,25 @@ class WeatherCollectionVC: UIViewController {
         doneEditingButton.target = self
         doneEditingButton.action = #selector(editButton)
         
+        let refresher = UIRefreshControl()
+        self.collectionView.alwaysBounceVertical = true
+        refresher.tintColor = UIColor.white
+        refresher.addTarget(self, action: #selector(refreshWeather), for: UIControlEvents.valueChanged)
+        self.collectionView.refreshControl = refresher
+        
+        initializeRealm()
+        refreshWeather()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        initializeRealm()
-        
         fabMenuController?.fabMenu.isHidden = false
 
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        self.refresher = UIRefreshControl()
-        self.collectionView.alwaysBounceVertical = true
-        self.refresher.tintColor = UIColor.white
-        self.refresher.addTarget(self, action: #selector(refreshWeather), for: .valueChanged)
-        self.collectionView.addSubview(refresher)
-        
-        refreshWeather()
-    }
-    
     func addCityButtonPressed() {
-        token?.stop()
         performSegue(withIdentifier: "CitySearch", sender: nil)
     }
     
@@ -77,7 +70,7 @@ class WeatherCollectionVC: UIViewController {
     func refreshWeather() {
         
         Coordinator.shared.updateAllWeather { error in
-            self.refresher.endRefreshing()
+            self.collectionView.refreshControl?.endRefreshing()
             guard error == nil else { return }
             
             switch error! {
@@ -119,7 +112,7 @@ class WeatherCollectionVC: UIViewController {
                     collectionView.reloadData()
                     self?.updateUI()
                     Loading.shared.hide()
-                    self?.refresher.endRefreshing()
+                    self?.collectionView.refreshControl?.endRefreshing()
                 })
             case .error(let error):
                 print(error)
@@ -135,7 +128,7 @@ class WeatherCollectionVC: UIViewController {
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
 
-        doneEditingButton.tintColor = editing == true ? swColor : .clear
+        doneEditingButton.tintColor = editing == true ? SWPrimaryColor : .clear
         doneEditingButton.isEnabled = editing
         fabMenuController?.fabMenu.isHidden = editing
         collectionView.reloadData()

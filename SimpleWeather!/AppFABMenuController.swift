@@ -23,36 +23,40 @@ class AppFABMenuController: FABMenuController {
 
 extension AppFABMenuController {
     fileprivate func prepareFABButton() {
-        fabButton = FABButton(image: Icon.cm.add, tintColor: swColor)
-        fabButton.pulseColor = swColor
+        fabButton = FABButton(image: Icon.cm.add, tintColor: SWPrimaryColor)
+        fabButton.pulseColor = SWPrimaryColor
         fabButton.backgroundColor = Color.white
     }
     
     fileprivate func prepareAddCityFABMenuItem() {
         addCityFABMenuItem = FABMenuItem()
         addCityFABMenuItem.title = "Add City"
+        addCityFABMenuItem.titleLabel.font = UIFont(name: "Avenir", size: 17)!
         addCityFABMenuItem.fabButton.image = Icon.cm.add
         addCityFABMenuItem.fabButton.tintColor = .white
         addCityFABMenuItem.fabButton.pulseColor = .white
-        addCityFABMenuItem.fabButton.backgroundColor = swColor
+        addCityFABMenuItem.fabButton.backgroundColor = SWPrimaryColor
         addCityFABMenuItem.fabButton.addTarget(self, action: #selector(handleAddCityFABmenuItem(button:)), for: .touchUpInside)
     }
     
     fileprivate func prepareRemindersFABMenuItem() {
         editCitiesFABMenuItem = FABMenuItem()
         editCitiesFABMenuItem.title = "Edit"
+        editCitiesFABMenuItem.titleLabel.font = UIFont(name: "Avenir", size: 17)!
         editCitiesFABMenuItem.fabButton.image = Icon.cm.edit
         editCitiesFABMenuItem.fabButton.tintColor = .white
         editCitiesFABMenuItem.fabButton.pulseColor = .white
-        editCitiesFABMenuItem.fabButton.backgroundColor = Color.red.base
+        editCitiesFABMenuItem.fabButton.backgroundColor = SWSecondaryColor
         editCitiesFABMenuItem.fabButton.addTarget(self, action: #selector(handleEditCitiesFABMenuItem(button:)), for: .touchUpInside)
     }
     
     fileprivate func prepareFABMenu() {
         fabMenu.fabButton = fabButton
         fabMenu.fabMenuItems = [addCityFABMenuItem, editCitiesFABMenuItem]
-        fabMenuBackingBlurEffectStyle = .regular
+        fabMenuBackingBlurEffectStyle = .prominent
         fabMenuBacking = .blur
+        fabMenu.fabButton?.shadowColor = .black
+        fabMenu.fabButton?.shadowRadius = 4.0
         
         view.layout(fabMenu)
             .size(fabMenuSize)
