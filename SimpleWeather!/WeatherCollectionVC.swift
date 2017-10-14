@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import Material
 
 let SWPrimaryColor = UIColor(red: 71/255, green: 96/255, blue: 137/255, alpha: 1)
 let SWSecondaryColor = UIColor(red: 0, green: 0.737, blue: 0.831, alpha: 1)
@@ -49,8 +50,8 @@ class WeatherCollectionVC: UIViewController {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         fabMenuController?.fabMenu.isHidden = false
 
@@ -171,7 +172,7 @@ extension WeatherCollectionVC: UICollectionViewDelegate, UICollectionViewDataSou
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WeatherCell", for: indexPath) as? WeatherCell else {
             return UICollectionViewCell()
         }
-        
+
         cell.configureWith(locations[indexPath.row])
         cell.motionIdentifier = cell.location.city
         cell.deleteButton.isHidden = (!isEditing) || (cell.location.isCurrentLocation)

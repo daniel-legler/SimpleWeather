@@ -16,7 +16,7 @@ class WeatherCell: UICollectionViewCell {
     @IBOutlet weak var deleteButton: DeleteButton!
     @IBOutlet weak var locationSymbol: UIImageView!
     
-    weak var location: Location!
+    var location: Location!
     
     func configureWith(_ location: Location) {
         
