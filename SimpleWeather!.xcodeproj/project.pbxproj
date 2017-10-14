@@ -80,6 +80,7 @@
 		74B6E8B61F3FC4CA00F46B10 /* WeatherDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherDetailVC.swift; sourceTree = "<group>"; };
 		74B6E8B81F3FC67400F46B10 /* WeatherTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherTableViewCell.swift; sourceTree = "<group>"; };
 		74B6E8BC1F3FE29200F46B10 /* NetworkStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkStatus.swift; sourceTree = "<group>"; };
+		74C9CB1F1F9077C0004A9E51 /* simpleweather-b995e-firebase-adminsdk-5ctb5-4d3889b06a.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "simpleweather-b995e-firebase-adminsdk-5ctb5-4d3889b06a.json"; sourceTree = "<group>"; };
 		74CD432E1F3ACA5F004BD368 /* SimpleWeather!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SimpleWeather!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		74CD43311F3ACA5F004BD368 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		74CD43361F3ACA5F004BD368 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -167,6 +168,7 @@
 				74CD433D1F3ACA5F004BD368 /* LaunchScreen.storyboard */,
 				74CD43401F3ACA5F004BD368 /* Info.plist */,
 				74F3B6EB1F7A32BC003B1991 /* GoogleService-Info.plist */,
+				74C9CB1F1F9077C0004A9E51 /* simpleweather-b995e-firebase-adminsdk-5ctb5-4d3889b06a.json */,
 			);
 			path = "SimpleWeather!";
 			sourceTree = "<group>";
@@ -366,7 +368,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"";
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n\nif [ \"${CONFIGURATION}\" = \"Release\" ]; then\n\n    GOOGLE_APP_ID=1:466542521038:ios:4074d1e76d054fa5\n\n    \"${PODS_ROOT}\"/FirebaseCrash/upload-sym \"${SRCROOT}/SimpleWeather!/simpleweather-b995e-firebase-adminsdk-5ctb5-4d3889b06a.json\"\nfi";
 		};
 		7BC8F9C8A8599D477519E072 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -377,6 +379,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-SimpleWeather!/Pods-SimpleWeather!-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/Material/Material.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -385,6 +388,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Material.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -611,6 +615,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -657,6 +662,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.legler.WeatherAppV3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

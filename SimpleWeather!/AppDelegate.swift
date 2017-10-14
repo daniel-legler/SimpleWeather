@@ -20,9 +20,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         Coordinator.shared.setup()
         
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Avenir", size: 18)!,
+                                                             NSForegroundColorAttributeName: SWPrimaryColor],
+                                                            for: .normal )
+        let navAppearance = UINavigationBar.appearance()
+        navAppearance.titleTextAttributes = [NSFontAttributeName: UIFont(name: "Avenir", size: 20)!,
+                                             NSForegroundColorAttributeName: SWPrimaryColor]
+        navAppearance.tintColor = SWPrimaryColor
+        navAppearance.backgroundColor = SWPrimaryColor
+        
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let rootVC = mainStoryboard.instantiateViewController(withIdentifier: "SWNavigationController")
-        
         window = UIWindow(frame: Screen.bounds)
         window!.rootViewController = AppFABMenuController(rootViewController: rootVC)
         window!.makeKeyAndVisible()

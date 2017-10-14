@@ -36,13 +36,4 @@ extension UIViewController {
     func dismissKeyboard() {
         view.endEditing(true)
     }
-    
-    func customizeNavigationController() {
-        
-        navigationController?.navigationBar.titleTextAttributes = navigationBarTitleAttributes
-        navigationController?.navigationBar.tintColor = SWPrimaryColor
-        navigationController?.navigationBar.backgroundColor = SWPrimaryColor
-                
-    }
-    
 }

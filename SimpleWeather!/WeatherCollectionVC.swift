@@ -11,8 +11,6 @@ import RealmSwift
 
 let SWPrimaryColor = UIColor(red: 71/255, green: 96/255, blue: 137/255, alpha: 1)
 let SWSecondaryColor = UIColor(red: 0, green: 0.737, blue: 0.831, alpha: 1)
-let navigationBarTitleAttributes = [NSFontAttributeName: UIFont(name: "Avenir", size: 20)!,
-                                    NSForegroundColorAttributeName: SWPrimaryColor]
 
 class WeatherCollectionVC: UIViewController {
 
@@ -35,11 +33,10 @@ class WeatherCollectionVC: UIViewController {
         super.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(noConnection), name: .SWNoNetworkConnection, object: nil)
-
-        customizeNavigationController()
         
         doneEditingButton.target = self
         doneEditingButton.action = #selector(editButton)
+        setEditing(false, animated: false)
         
         let refresher = UIRefreshControl()
         self.collectionView.alwaysBounceVertical = true
@@ -57,6 +54,12 @@ class WeatherCollectionVC: UIViewController {
         
         fabMenuController?.fabMenu.isHidden = false
 
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        fabMenuController?.fabMenu.isHidden = true
     }
     
     func addCityButtonPressed() {
