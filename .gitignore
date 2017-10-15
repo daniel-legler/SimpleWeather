@@ -1,3 +1,5 @@
 fastlane/metadata
 fastlane/screenshots
 Pods
+.*json
+Google.*
