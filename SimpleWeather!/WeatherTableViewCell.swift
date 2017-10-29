@@ -11,13 +11,9 @@ import UIKit
 class WeatherTableViewCell: UITableViewCell {
     
     @IBOutlet weak var weatherIcon: UIImageView!
-    
     @IBOutlet weak var dayLabel: UILabel!
-    
     @IBOutlet weak var weatherType: UILabel!
-    
     @IBOutlet weak var highTemp: UILabel!
-    
     @IBOutlet weak var lowTemp: UILabel!
     
     func configureCell(forecast: ForecastWeather) {

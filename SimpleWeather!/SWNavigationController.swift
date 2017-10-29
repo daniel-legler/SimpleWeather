@@ -10,10 +10,9 @@ import UIKit
 import Material
 
 class SWNavigationController: UINavigationController {
-        open override func viewDidLoad() {
-            super.viewDidLoad()
-            isMotionEnabled = true
-            motionNavigationTransitionType = .autoReverse(presenting: .zoomSlide(direction: .left))
-
-        }
+    open override func viewDidLoad() {
+        super.viewDidLoad()
+        isMotionEnabled = true
+        motionNavigationTransitionType = .autoReverse(presenting: .zoomSlide(direction: .left))
+    }
 }

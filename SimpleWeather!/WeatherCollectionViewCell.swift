@@ -32,16 +32,9 @@ class WeatherCell: UICollectionViewCell {
 
         self.backgroundColor = theme.secondary()
 
-        switch theme {
-            
-        case .day:
-            self.weatherIcon.image = UIImage(named: (location.current?.type) ?? "Unkown")
-            
-        case .night:
-            self.weatherIcon.image = UIImage(named: (location.current?.type)?.appending("-dark") ?? "Unkown")
-            
-        }
-
+        let iconName = location.current?.type.appending(theme == .day ? "" : "-dark") ?? "Unkown"
+        self.weatherIcon.image = UIImage(named: iconName)
+        
         self.locationSymbol.isHidden = !location.isCurrentLocation
         
         self.customize()
