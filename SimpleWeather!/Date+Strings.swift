@@ -8,12 +8,6 @@
 
 import Foundation
 
-extension Double {
-    func kelvinToFarenheit() -> Double {
-        return (self * (9/5) - 459.67).rounded()
-    }
-}
-
 extension Date {
     func dayOfTheWeek ( ) -> String {
         let formatter = DateFormatter()
