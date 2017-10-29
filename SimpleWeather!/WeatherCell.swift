@@ -27,9 +27,23 @@ class WeatherCell: UICollectionViewCell {
         self.deleteButton.cityToDelete = location.city
 
         self.currentTemp.text = "\(String(Int(location.current?.temp ?? 0)))°"
-        self.weatherIcon.image = UIImage(named: location.current?.type ?? "Unkown")
-        self.locationSymbol.isHidden = !location.isCurrentLocation
+        
+        let theme = Theme.at(location)
 
+        self.backgroundColor = theme.secondary()
+
+        switch theme {
+            
+        case .day:
+            self.weatherIcon.image = UIImage(named: (location.current?.type) ?? "Unkown")
+            
+        case .night:
+            self.weatherIcon.image = UIImage(named: (location.current?.type)?.appending("-dark") ?? "Unkown")
+            
+        }
+
+        self.locationSymbol.isHidden = !location.isCurrentLocation
+        
         self.customize()
         
         self.deleteButton.customize()
@@ -47,11 +61,3 @@ class WeatherCell: UICollectionViewCell {
     }
     
 }
-
-extension UIButton {
-    func customize() {
-        self.layer.cornerRadius = 11.0
-        self.transform = CGAffineTransform(rotationAngle: CGFloat(.pi / 4.0))
-    }
-}
-    

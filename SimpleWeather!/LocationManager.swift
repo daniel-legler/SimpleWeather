@@ -16,11 +16,8 @@ class CoreLocationManager: NSObject, CLLocationManagerDelegate {
     
     override init() {
         super.init()
-        
         locationManager.delegate = self
-        
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-
         locationManager.requestWhenInUseAuthorization()
         locationManager.distanceFilter = 500
         locationManager.startUpdatingLocation()
@@ -57,7 +54,7 @@ class CoreLocationManager: NSObject, CLLocationManagerDelegate {
         CLGeocoder().reverseGeocodeLocation(location) { (placemarks, _) in
 
             guard let placemark = placemarks?[0],
-                  let city      = placemark.addressDictionary!["City"] as? String else {
+                  let city      = placemark.locality else {
                     print("Unable to geocode coordinates")
                     completion(nil)
                     return

@@ -23,8 +23,8 @@ class AppFABMenuController: FABMenuController {
 
 extension AppFABMenuController {
     fileprivate func prepareFABButton() {
-        fabButton = FABButton(image: Icon.cm.add, tintColor: SWPrimaryColor)
-        fabButton.pulseColor = SWPrimaryColor
+        fabButton = FABButton(image: Icon.cm.add, tintColor: Theme.primaryNow())
+        fabButton.pulseColor = Theme.primaryNow()
         fabButton.backgroundColor = Color.white
     }
     
@@ -35,7 +35,7 @@ extension AppFABMenuController {
         addCityFABMenuItem.fabButton.image = Icon.cm.add
         addCityFABMenuItem.fabButton.tintColor = .white
         addCityFABMenuItem.fabButton.pulseColor = .white
-        addCityFABMenuItem.fabButton.backgroundColor = SWPrimaryColor
+        addCityFABMenuItem.fabButton.backgroundColor = Theme.primaryNow()
         addCityFABMenuItem.fabButton.addTarget(self, action: #selector(handleAddCityFABmenuItem(button:)), for: .touchUpInside)
     }
     
@@ -46,7 +46,7 @@ extension AppFABMenuController {
         editCitiesFABMenuItem.fabButton.image = Icon.cm.edit
         editCitiesFABMenuItem.fabButton.tintColor = .white
         editCitiesFABMenuItem.fabButton.pulseColor = .white
-        editCitiesFABMenuItem.fabButton.backgroundColor = SWSecondaryColor
+        editCitiesFABMenuItem.fabButton.backgroundColor = Theme.secondaryNow()
         editCitiesFABMenuItem.fabButton.addTarget(self, action: #selector(handleEditCitiesFABMenuItem(button:)), for: .touchUpInside)
     }
     

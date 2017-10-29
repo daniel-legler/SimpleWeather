@@ -21,13 +21,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Coordinator.shared.setup()
         
         UIBarButtonItem.appearance().setTitleTextAttributes([NSFontAttributeName: UIFont(name: "Avenir", size: 18)!,
-                                                             NSForegroundColorAttributeName: SWPrimaryColor],
+                                                             NSForegroundColorAttributeName: Theme.primaryNow()],
                                                             for: .normal )
         let navAppearance = UINavigationBar.appearance()
         navAppearance.titleTextAttributes = [NSFontAttributeName: UIFont(name: "Avenir", size: 20)!,
-                                             NSForegroundColorAttributeName: SWPrimaryColor]
-        navAppearance.tintColor = SWPrimaryColor
-        navAppearance.backgroundColor = SWPrimaryColor
+                                             NSForegroundColorAttributeName: Theme.primaryNow()]
+        navAppearance.tintColor = Theme.primaryNow()
+        navAppearance.backgroundColor = Theme.primaryNow()
         
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let rootVC = mainStoryboard.instantiateViewController(withIdentifier: "SWNavigationController")

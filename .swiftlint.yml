@@ -1,5 +1,6 @@
 excluded:
   - Pods
+  - /Users/legler/dev/SimpleWeather!/SimpleWeather!/TimezoneMapper.swift
 disabled_rules:
   - trailing_whitespace
   - line_length

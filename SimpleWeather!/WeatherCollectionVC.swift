@@ -10,14 +10,13 @@ import UIKit
 import RealmSwift
 import Material
 
-let SWPrimaryColor = UIColor(red: 71/255, green: 96/255, blue: 137/255, alpha: 1)
-let SWSecondaryColor = UIColor(red: 0, green: 0.737, blue: 0.831, alpha: 1)
-
 class WeatherCollectionVC: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var doneEditingButton: UIBarButtonItem!
-    
+//    @IBOutlet weak var emptyDataImage: UIImageView!
+//    @IBOutlet weak var emptyDataLabel: UILabel!
+
     var locations: Results<Location> = {
         
             let realm = try! Realm()
@@ -132,7 +131,7 @@ class WeatherCollectionVC: UIViewController {
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
 
-        doneEditingButton.tintColor = editing == true ? SWPrimaryColor : .clear
+        doneEditingButton.tintColor = editing == true ? Theme.day.primary() : .clear
         doneEditingButton.isEnabled = editing
         fabMenuController?.fabMenu.isHidden = editing
         collectionView.reloadData()
@@ -146,7 +145,8 @@ class WeatherCollectionVC: UIViewController {
         if !locationsPresent {
             setEditing(false, animated: false)
         }
-    
+        
+//        [emptyDataImage, emptyDataLabel].forEach { $0.isHidden = locationsPresent }
         collectionView.isHidden = !locationsPresent
         
     }

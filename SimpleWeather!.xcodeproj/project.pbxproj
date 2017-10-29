@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7415190E1F4E8FC200AA2230 /* ViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7415190D1F4E8FC200AA2230 /* ViewControllerExtensions.swift */; };
+		7415190E1F4E8FC200AA2230 /* UIViewController+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7415190D1F4E8FC200AA2230 /* UIViewController+Alerts.swift */; };
 		741519101F4E904200AA2230 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7415190F1F4E904200AA2230 /* LocationManager.swift */; };
 		74251AB91F8C3EFD0035BFA1 /* AppFABMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74251AB81F8C3EFD0035BFA1 /* AppFABMenuController.swift */; };
 		743C54851F3D561B00141A0F /* FoundationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743C54841F3D561B00141A0F /* FoundationExtensions.swift */; };
@@ -16,6 +16,9 @@
 		744D59771F5F9F8900E395ED /* SWNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 744D59761F5F9F8900E395ED /* SWNavigationController.swift */; };
 		74A8BC071F674427009BAC05 /* SimpleWeather_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A8BC061F674427009BAC05 /* SimpleWeather_UITests.swift */; };
 		74A8BC0F1F67453E009BAC05 /* SnapshotHelperXcode8.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A8BC0E1F67453E009BAC05 /* SnapshotHelperXcode8.swift */; };
+		74B41BD71FA191A400DBAA7F /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B41BD61FA191A400DBAA7F /* Theme.swift */; };
+		74B41BD91FA66BC400DBAA7F /* TimezoneMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B41BD81FA66BC300DBAA7F /* TimezoneMapper.swift */; };
+		74B41BDB1FA670F200DBAA7F /* UIButton+Customizations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B41BDA1FA670F200DBAA7F /* UIButton+Customizations.swift */; };
 		74B6E8A81F3D765B00F46B10 /* WeatherCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B6E8A71F3D765B00F46B10 /* WeatherCollectionVC.swift */; };
 		74B6E8AA1F3D786000F46B10 /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B6E8A91F3D786000F46B10 /* WeatherCell.swift */; };
 		74B6E8AE1F3E4C6500F46B10 /* CitySearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B6E8AD1F3E4C6500F46B10 /* CitySearchVC.swift */; };
@@ -61,7 +64,7 @@
 
 /* Begin PBXFileReference section */
 		407201828B6B626058C89F25 /* Pods-SimpleWeather!.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleWeather!.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SimpleWeather!/Pods-SimpleWeather!.debug.xcconfig"; sourceTree = "<group>"; };
-		7415190D1F4E8FC200AA2230 /* ViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerExtensions.swift; sourceTree = "<group>"; };
+		7415190D1F4E8FC200AA2230 /* UIViewController+Alerts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alerts.swift"; sourceTree = "<group>"; };
 		7415190F1F4E904200AA2230 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		74251AB81F8C3EFD0035BFA1 /* AppFABMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFABMenuController.swift; sourceTree = "<group>"; };
 		743C54841F3D561B00141A0F /* FoundationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationExtensions.swift; sourceTree = "<group>"; };
@@ -72,6 +75,9 @@
 		74A8BC061F674427009BAC05 /* SimpleWeather_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleWeather_UITests.swift; sourceTree = "<group>"; };
 		74A8BC081F674427009BAC05 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		74A8BC0E1F67453E009BAC05 /* SnapshotHelperXcode8.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelperXcode8.swift; path = fastlane/SnapshotHelperXcode8.swift; sourceTree = SOURCE_ROOT; };
+		74B41BD61FA191A400DBAA7F /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		74B41BD81FA66BC300DBAA7F /* TimezoneMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimezoneMapper.swift; sourceTree = "<group>"; };
+		74B41BDA1FA670F200DBAA7F /* UIButton+Customizations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Customizations.swift"; sourceTree = "<group>"; };
 		74B6E8A71F3D765B00F46B10 /* WeatherCollectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherCollectionVC.swift; sourceTree = "<group>"; };
 		74B6E8A91F3D786000F46B10 /* WeatherCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
 		74B6E8AD1F3E4C6500F46B10 /* CitySearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CitySearchVC.swift; sourceTree = "<group>"; };
@@ -129,7 +135,8 @@
 			children = (
 				74B6E8B21F3E67EA00F46B10 /* NotificationExtensions.swift */,
 				743C54841F3D561B00141A0F /* FoundationExtensions.swift */,
-				7415190D1F4E8FC200AA2230 /* ViewControllerExtensions.swift */,
+				7415190D1F4E8FC200AA2230 /* UIViewController+Alerts.swift */,
+				74B41BDA1FA670F200DBAA7F /* UIButton+Customizations.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -176,6 +183,7 @@
 		74CD43461F3ACD56004BD368 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				74B41BD81FA66BC300DBAA7F /* TimezoneMapper.swift */,
 				7415190F1F4E904200AA2230 /* LocationManager.swift */,
 				74D82C6F1F4BD205002D5F3F /* RealmManager.swift */,
 				74CD43511F3B5F94004BD368 /* Coordinator.swift */,
@@ -212,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				743E06B21F44175D00D23DAF /* Location.swift */,
+				74B41BD61FA191A400DBAA7F /* Theme.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -437,8 +446,11 @@
 				74B6E8B71F3FC4CA00F46B10 /* WeatherDetailVC.swift in Sources */,
 				74B6E8B91F3FC67400F46B10 /* WeatherTableViewCell.swift in Sources */,
 				741519101F4E904200AA2230 /* LocationManager.swift in Sources */,
+				74B41BD91FA66BC400DBAA7F /* TimezoneMapper.swift in Sources */,
 				74CD43521F3B5F94004BD368 /* Coordinator.swift in Sources */,
+				74B41BD71FA191A400DBAA7F /* Theme.swift in Sources */,
 				74D82C701F4BD205002D5F3F /* RealmManager.swift in Sources */,
+				74B41BDB1FA670F200DBAA7F /* UIButton+Customizations.swift in Sources */,
 				74251AB91F8C3EFD0035BFA1 /* AppFABMenuController.swift in Sources */,
 				744D59751F5F988900E395ED /* DeleteButton.swift in Sources */,
 				74CD434E1F3ACDE2004BD368 /* WeatherApiManager.swift in Sources */,
@@ -449,7 +461,7 @@
 				74B6E8BD1F3FE29200F46B10 /* NetworkStatus.swift in Sources */,
 				743E06B31F44175D00D23DAF /* Location.swift in Sources */,
 				744D59771F5F9F8900E395ED /* SWNavigationController.swift in Sources */,
-				7415190E1F4E8FC200AA2230 /* ViewControllerExtensions.swift in Sources */,
+				7415190E1F4E8FC200AA2230 /* UIViewController+Alerts.swift in Sources */,
 				74B6E8B31F3E67EA00F46B10 /* NotificationExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -571,7 +583,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -622,7 +634,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";

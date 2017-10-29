@@ -20,12 +20,13 @@ class WeatherTableViewCell: UITableViewCell {
     
     @IBOutlet weak var lowTemp: UILabel!
     
-    func configureCell(forecast: ForecastWeather) {
+    func configureCell(forecast: ForecastWeather, theme: Theme) {
         lowTemp.text = "\(String(Int(forecast.low)))°"
         highTemp.text = "\(String(Int(forecast.high)))°"
         weatherType.text = forecast.type
         dayLabel.text = forecast.date.dayOfTheWeek()
-        weatherIcon.image = UIImage(named: (forecast.type))
+        let iconName = theme == .day ? forecast.type : forecast.type.appending("-dark")
+        weatherIcon.image = UIImage(named: iconName)
     }
    
 }
