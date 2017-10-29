@@ -72,7 +72,10 @@ final class Coordinator {
             group.enter()
             downloadLocalWeather(completion: { (location, error) in
                 
-                guard let location = location, error == nil else { return }
+                guard let location = location, error == nil else {
+                    group.leave()
+                    return
+                }
                 
                 newLocations.append(location)
                 
@@ -124,8 +127,10 @@ final class Coordinator {
         
         CLM.findCity(completion: { (city) in
             
-            guard let city = city,
-                let coordinate = self.CLM.coordinate else { return }
+            guard let city = city, let coordinate = self.CLM.coordinate else {
+                completion(nil, WeatherApiError.downloadError)
+                return
+            }
                         
             self.RLM.updateCurrentLocation(city: city) { wasCustomLocation in
                 

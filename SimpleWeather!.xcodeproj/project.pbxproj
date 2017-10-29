@@ -196,11 +196,11 @@
 		74CD43481F3ACD5E004BD368 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				744D59761F5F9F8900E395ED /* SWNavigationController.swift */,
 				74251AB81F8C3EFD0035BFA1 /* AppFABMenuController.swift */,
 				74B6E8A71F3D765B00F46B10 /* WeatherCollectionVC.swift */,
-				74B6E8AD1F3E4C6500F46B10 /* CitySearchVC.swift */,
 				74B6E8B61F3FC4CA00F46B10 /* WeatherDetailVC.swift */,
-				744D59761F5F9F8900E395ED /* SWNavigationController.swift */,
+				74B6E8AD1F3E4C6500F46B10 /* CitySearchVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";

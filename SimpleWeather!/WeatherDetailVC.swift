@@ -20,6 +20,10 @@ class WeatherDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     var location: Location?
     
+    var theme: Theme {
+        return location != nil ? Theme.at(location!) : Theme.day
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,7 +45,9 @@ class WeatherDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         tempLabel.text = "\(Int(location?.current?.temp ?? 0.0))°"
         locationLabel.text = location?.city
         weatherTypeLabel.text = location?.current?.type
-        weatherImage.image = UIImage(named: (location?.current?.type ?? "Unkown"))//.appending("-dark"))
+        weatherTodayView.backgroundColor = theme.secondary()
+        let iconName = location?.current?.type.appending(theme == .night ? "-dark" : "") ?? "Unkown"
+        weatherImage.image = UIImage(named: iconName)
     }
     
     @objc
@@ -62,9 +68,8 @@ class WeatherDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSou
             let forecast = location?.forecasts[indexPath.row] else {
                 return WeatherTableViewCell()
             }
-    
         
-        cell.configureCell(forecast: forecast, theme: Theme.at(location))
+        cell.configureCell(forecast: forecast)
     
         return cell
     
