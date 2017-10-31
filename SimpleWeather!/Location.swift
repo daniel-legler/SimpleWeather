@@ -10,6 +10,14 @@ import Foundation
 import RealmSwift
 import CoreLocation
 
+struct LocationInfo {
+    var city: String = ""
+    var lat: Double = 0.0
+    var lon: Double = 0.0
+    var isCurrentLocation: Bool = false
+    var isCustomLocation: Bool = false
+}
+
 class Location: Object {
     
     dynamic var city: String = ""

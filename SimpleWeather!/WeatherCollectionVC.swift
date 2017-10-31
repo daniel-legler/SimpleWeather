@@ -32,6 +32,8 @@ class WeatherCollectionVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = Theme.now().primary()
+
         NotificationCenter.default.addObserver(self, selector: #selector(noConnection), name: .SWNoNetworkConnection, object: nil)
         
         doneEditingButton.target = self
@@ -88,7 +90,7 @@ class WeatherCollectionVC: UIViewController {
     func initializeRealm() {
         
         token = locations.addNotificationBlock {[weak self] (changes: RealmCollectionChange) in
-            
+            print("Locations Updated")
             guard let collectionView = self?.collectionView else { return }
             
             switch changes {

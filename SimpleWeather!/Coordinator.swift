@@ -101,7 +101,7 @@ final class Coordinator {
             guard error == nil else { completion(nil, error!); return }
             
             guard let location = location else { completion(nil, .realmError); return }
-            
+
             completion(location, nil)
             
         }

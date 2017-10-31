@@ -29,7 +29,8 @@ final class RealmManager {
     }
     
     func save(_ location: Location, completion: @escaping (WeatherApiError) -> Void ) {
-    
+        print("Called Save Location")
+
         do {
             
             let realm = try Realm()
@@ -46,7 +47,7 @@ final class RealmManager {
     }
     
     func save(_ locations: [Location], completion: @escaping (WeatherApiError) -> Void ) {
-        
+        print("Called Save Locations")
         do {
             
             let realm = try Realm()
@@ -96,7 +97,7 @@ final class RealmManager {
     }
     
     func updateCurrentLocation(city: String, completion: @escaping (Bool) -> Void ) {
-        
+        print("Called updateCurrentLocation")
         do {
             
             let realm = try Realm()
@@ -105,8 +106,7 @@ final class RealmManager {
             if let currentLocation = Array(realm.objects(Location.self).filter("isCurrentLocation == true")).first {
                 
                 // If this location wasn't added by the user manually, remove it
-                if !currentLocation.isCustomLocation &&
-                    currentLocation.city != city {
+                if currentLocation.isCustomLocation == false && currentLocation.city != city {
                 
                     try realm.write {
                         realm.delete(currentLocation)
@@ -114,7 +114,7 @@ final class RealmManager {
                 }
                 
                 // Otherwise, flag it as not the current location
-                else {
+                else if currentLocation.city != city {
                     try realm.write {
                         currentLocation.isCurrentLocation = false
                     }

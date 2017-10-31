@@ -101,7 +101,7 @@ class WeatherApiManager {
             location.isCustomLocation = flags.isCustomLocation
             location.current = currentWeather
             location.forecasts.append(objectsIn: forecasts)
-            
+
             completion(location, nil)
         }
     }
