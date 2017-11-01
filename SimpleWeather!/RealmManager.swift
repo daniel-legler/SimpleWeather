@@ -97,7 +97,7 @@ final class RealmManager {
     }
     
     func updateCurrentLocation(city: String, completion: @escaping (Bool) -> Void ) {
-        print("Called updateCurrentLocation")
+
         do {
             
             let realm = try Realm()
@@ -124,11 +124,14 @@ final class RealmManager {
             // If the current device location already exists in Realm
             if let object = realm.object(ofType: Location.self, forPrimaryKey: city) {
                 
-                // Update the location object to be the current location
-                try realm.write {
-                    object.isCurrentLocation = true
-                    completion(true)
+                // Update the location object to be the current location, if not already
+                if !object.isCurrentLocation {
+                    try realm.write {
+                        object.isCurrentLocation = true
+                    }
                 }
+                
+                completion(true)
                 
             } else {
                 completion(false)

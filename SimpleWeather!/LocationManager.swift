@@ -62,13 +62,5 @@ class CoreLocationManager: NSObject, CLLocationManagerDelegate {
             
             completion(city)
         }
-        
     }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-       
-        NotificationCenter.default.post(name: .SWLocationAvailable, object: nil)
-
-    }
-
 }

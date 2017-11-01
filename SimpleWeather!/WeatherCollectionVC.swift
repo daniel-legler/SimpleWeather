@@ -33,7 +33,7 @@ class WeatherCollectionVC: UIViewController {
         super.viewDidLoad()
         
         self.view.backgroundColor = Theme.now().primary()
-
+        
         NotificationCenter.default.addObserver(self, selector: #selector(noConnection), name: .SWNoNetworkConnection, object: nil)
         
         doneEditingButton.target = self
