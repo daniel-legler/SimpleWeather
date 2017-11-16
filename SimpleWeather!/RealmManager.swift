@@ -102,48 +102,49 @@ final class RealmManager {
             
             let realm = try Realm()
             
-            // If there is a current location in Realm already, update or delete it
-            if let currentLocation = Array(realm.objects(Location.self).filter("isCurrentLocation == true")).first {
-                
-                // If this location wasn't added by the user manually, remove it
-                if currentLocation.isCustomLocation == false && currentLocation.city != city {
-                
-                    try realm.write {
-                        realm.delete(currentLocation)
-                    }
-                }
-                
-                // Otherwise, flag it as not the current location
-                else if currentLocation.city != city {
-                    try realm.write {
-                        currentLocation.isCurrentLocation = false
-                    }
-                }
-            }
+            let savedCurrentLocation = Array(realm.objects(Location.self).filter("isCurrentLocation == true")).first
+            let savedLocationForCity = realm.object(ofType: Location.self, forPrimaryKey: city)
             
-            // If the current device location already exists in Realm
-            if let object = realm.object(ofType: Location.self, forPrimaryKey: city) {
-                
-                // Update the location object to be the current location, if not already
-                if !object.isCurrentLocation {
-                    try realm.write {
-                        object.isCurrentLocation = true
-                    }
-                }
-                
-                completion(true)
-                
-            } else {
+            // Case 0: User location hasn't been saved yet
+            if savedCurrentLocation == nil {
                 completion(false)
             }
             
-            // Otherwise there is no saved current location, and the current location doesn't exist yet
+            // Case 1: Haven't Changed Cities, User Did Add City as Custom Location
+            // Case 2: Haven't Changed Cities, User Did NOT Add City as Custom Location
+            else if savedCurrentLocation!.city == city {
+                completion(savedCurrentLocation!.isCustomLocation)
+            }
+            
+            // Case 3: Have Changed Cities, User Did Add City as Custom Location
+            else if savedCurrentLocation!.isCustomLocation {
+                try realm.write {
+                    savedCurrentLocation!.isCurrentLocation = false
+                    if let newCurrentLocation = savedLocationForCity {
+                        newCurrentLocation.isCurrentLocation = true
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                }
+            }
+            
+            // Case 4: Have Changed Cities, User Did NOT Add City as Custom Location
+            else {
+                try realm.write {
+                    realm.delete(savedCurrentLocation!)
+                    if let newCurrentLocation = savedLocationForCity {
+                        newCurrentLocation.isCurrentLocation = true
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                }
+            }
             
         } catch {
             print(error.localizedDescription)
             completion(false)
         }
-        
     }
-
 }

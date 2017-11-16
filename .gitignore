@@ -1,5 +1,6 @@
 fastlane/metadata
 fastlane/screenshots
+fastlane/report.xml
 Pods
 SimpleWeather!/GoogleService-Info.plist
 SimpleWeather!/simpleweather-b995e-firebase-adminsdk-5ctb5-4d3889b06a.json
