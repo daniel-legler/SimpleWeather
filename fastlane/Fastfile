@@ -43,3 +43,5 @@ platform :ios do
     gym(scheme: "SimpleWeather!") # Build your app - more options available
     deliver(force: true)
   end
+
+end
